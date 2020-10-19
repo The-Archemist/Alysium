@@ -9,6 +9,9 @@ def grammarize(item):
 def listarize(array):
     string = ""
     for item in array:
+        if len(array) == 1:
+            return f"{grammarize(item)}."
+            
         #Items in a list of three or more need commas.
         if not array.index(item) == len(array) - 1:
             if not len(array) > 2:
