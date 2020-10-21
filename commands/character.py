@@ -1,7 +1,6 @@
 from commands.command import Command
 from evennia import CmdSet
 from evennia.utils import evtable, utils
-from server.utils.utils import grammarize, listarize
 
 class CharacterCmdSet(CmdSet):
     """
@@ -32,165 +31,109 @@ class CmdDrop(Command):
 
     key = "drop"
     locks = "cmd:all()"
+
+    key = "drop"
+    locks = "cmd:all()"
     arg_regex = r"\s|$"
 
     def func(self):
         """Implement command"""
+
         caller = self.caller
         target = self.args.strip()
-        error  = False
 
-        msg     = "You drop "
-        con_msg = "%s drops " % caller.name
-        err_msg = "You cannot drop "
-
-        if not target or not len(caller.contents) > 0:
+        if not target:
             caller.msg("Drop what?")
             return
-        
-        if not target == "all":
-            obj = caller.search(
-                target,
-                location = caller,
-                nofound_string="You are not carrying %s." % target,
-                multimatch_string="You are carrying more than one %s:" % target,
-            )
 
-            if not obj:
-                return
-
-            if not obj.at_before_drop(caller):
-                return
-
-            success = obj.move_to(caller.location, quiet=True)
-            if not success:
-                err_msg += f"{grammarize(obj)}."
-                caller.msg(err_msg)
-                return
-
-            msg     += f"{grammarize(obj)}."
-            con_msg += f"{grammarize(obj)}."
-
-        else:    
-            error_list = []    
-            item_list  = []
+        if target == "all":
             for obj in caller.contents:
-                if not obj:
-                    continue
-
                 if not obj.at_before_drop(caller):
                     continue
 
-                success = obj.move_to(caller.location, quiet=True)
-                if not success:
-                    error = True
-                    error_list.append(obj)
-                    continue
+                self.drop(obj)
+            return
 
-                item_list.append(obj)
+        # Because the DROP command by definition looks for items
+        # in inventory, call the search function using location = caller
+        obj = caller.search(
+            target,
+            location=caller,
+            nofound_string="You aren't carrying %s." % target,
+            multimatch_string="You carry more than one %s:" % target,
+        )
+        if not obj:
+            return
 
-                #call at_drop method
-                obj.at_drop(caller)
+        # Call the object script's at_before_drop() method.
+        if not obj.at_before_drop(caller):
+            return
 
-            #listarize build grammatically correct list
-            msg     += listarize(item_list)
-            con_msg += listarize(item_list)
+        self.drop(obj)
 
-        caller.msg(msg)
-        caller.location.msg_contents(con_msg, exclude=caller)
+    def drop(self, obj):
+        caller = self.caller
+        success = obj.move_to(caller.location, quiet=True)
 
-        if error:
-            err_msg += listarize(error_list)
-            caller.msg(err_msg)
+        if not success:
+            caller.msg(f"You cannot drop {obj.name}.")
+        else:
+            caller.msg(f"You drop {obj.name}.")
+            caller.location.msg_contents(f"{caller.name} drops {obj.name}.", exclude=caller)
+            # Call the object script's at_drop() method.
+            obj.at_drop(caller)
 
 
 class CmdGet(Command):
     """
     pick up something
-
     Usage:
-      get <object>
-
+      get <obj>
     Picks up an object from your location and puts it in
     your inventory.
     """
 
     key = "get"
+    aliases = "grab"
     locks = "cmd:all()"
     arg_regex = r"\s|$"
 
     def func(self):
         """implements the command."""
+
         caller = self.caller
         target = self.args.strip()
-        error  = False
-
-        msg     = "You get "
-        con_msg = "%s gets " % caller.name
-        err_msg = "You cannot get "
 
         if not target:
             caller.msg("Get what?")
             return
-
-        if not target == "all":
-            obj = caller.search(self.args, location = caller.location)
-            if not obj:
-                return
-
-            if caller == obj:
-                caller.msg("You cannot get yourself.")
-                return
-
-            if not obj.access(caller, "get"):
-                if obj.db.get_err_msg:
-                    caller.msg(obj.db.get_err_msg)
-                else:
-                    caller.msg("You cannot get that.")
-                return
-
-            #calling at_before_get hook method
-            if not obj.at_before_get(caller):
-                return
-
-            success = obj.move_to(caller, quiet=True)
-            if not success:
-                err_msg += f"{grammarize(obj)}."
-                caller.msg(err_msg)
-                return
+        obj = caller.search(target, location=caller.location)
+        if not obj:
+            return
+        if caller == obj:
+            caller.msg("You can't get yourself.")
+            return
+        if not obj.access(caller, "get"):
+            if obj.db.get_err_msg:
+                caller.msg(obj.db.get_err_msg)
             else:
-                msg += f"{grammarize(obj)}."
-                con_msg += f"{grammarize(obj)}."
+                caller.msg("You can't get that.")
+            return
 
-                #calling at_get hook method
-                obj.at_get(caller)
+        # calling at_before_get hook method
+        if not obj.at_before_get(caller):
+            return
 
+        success = obj.move_to(caller, quiet=True)
+        if not success:
+            caller.msg("This can't be picked up.")
         else:
-            error_list = []
-            item_list  = []
-            for obj in caller.location.contents:
-                if not caller == obj and obj.access(caller, "get"):
-                    #calling at_before_get hook method
-                    if not obj.at_before_get(caller):
-                        continue
-
-                    success = obj.move_to(caller, quiet=True)
-                    if not success:
-                        error = True
-                        error_list.append(obj)
-                        continue
-
-                    item_list.append(obj)
-                    obj.at_get(caller)
-
-            msg     += listarize(item_list)
-            con_msg += listarize(item_list) 
-         
-        caller.msg(msg)
-        caller.location.msg_contents(con_msg, exclude=caller)
-        if error:
-            err_msg += listarize(error_list)
-            caller.msg(err_msg)
+            caller.msg("You pick up %s." % obj.name)
+            caller.location.msg_contents(
+                "%s picks up %s." % (caller.name, obj.name), exclude=caller
+            )
+            # calling at_get hook method
+            obj.at_get(caller)
 
 class CmdInventory(Command):
     """

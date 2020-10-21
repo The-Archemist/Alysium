@@ -45,6 +45,6 @@ CONNECTION_SCREEN = """
  If you need to create an account, type (without the <>'s):
       |wcreate <username> <password>|n
 
-|b===================================================================|n""".format(
+|b===================================================================|n\n> """.format(
     settings.SERVERNAME, utils.get_evennia_version("short")
 )
