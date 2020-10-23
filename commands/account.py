@@ -24,15 +24,11 @@ class AccountCmdSet(CmdSet):
 from evennia.commands.default.help import CmdHelp as default_help
 class CmdHelp(default_help):
     """
-    View help or a list of topics
+    Command:
+      help <command/topic>
 
     Usage:
-      help <topic or command>
-      help list
-      help all
-
-    This will search for help on commands and other
-    topics related to the game.
+      This will search for help on commands and other game related topics.
     """
 
     key = "help"
@@ -54,8 +50,9 @@ class CmdHelp(default_help):
         _DEFAULT_WIDTH = settings.CLIENT_DEFAULT_WIDTH
         _SEP = "|C" + "-" * _DEFAULT_WIDTH + "|n"
 
-        string = _SEP + "\n"
+        string = _SEP
         if title:
+            string += "\n"
             string += "|CHelp for |w%s|n" % title
         if aliases:
             string += " |C(aliases: %s|C)|n" % ("|C,|n ".join("|w%s|n" % ali for ali in aliases))
@@ -101,10 +98,11 @@ class CmdHelp(default_help):
 
 class CmdPassword(Command):
     """
-    Change your password.
-    
+    Command:
+      password
+
     Usage:
-     password
+      Change your password.
     """
 
     key = "password"
@@ -142,10 +140,11 @@ class CmdPassword(Command):
 
 class CmdQuit(Command):
     """
-    Quit the game.
+    Command:
+      quit
 
     Usage:
-     quit
+      Quit the game.
     """
 
     key = "quit"
@@ -162,12 +161,11 @@ class CmdQuit(Command):
 
 class CmdWho(Command):
     """
-    List who is currently online
-
-    Usage:
+    Command:
       who
 
-    Shows who is currently online and additional information for privileged characters.
+    Usage:
+      Shows who is currently online and additional information.
     """
 
     key = "who"

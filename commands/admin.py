@@ -17,12 +17,11 @@ class AdminCmdSet(CmdSet):
 
 class CmdHome(Command):
     """
-    Move to your character's home location
-
-    Usage:
+    Command:
       home
 
-    Teleports you to your home location.
+    Usage:
+      Teleports you to your home location.
     """
 
     key = "home"
@@ -43,20 +42,19 @@ class CmdHome(Command):
 
 class CmdQuell(Command):
     """
-    use character's permissions instead of account's
-
-    Usage:
+    Command:
       quell
       unquell
 
-    Normally the permission level of the Account is used when puppeting a
-    Character/Object to determine access. This command will switch the lock
-    system to make use of the puppeted Object's permissions instead. This is
-    useful mainly for testing.
+    Usage:
+      Normally the permission level of the Account is used when puppeting a
+      Character/Object to determine access. This command will switch the lock
+      system to make use of the puppeted Object's permissions instead. This is
+      useful mainly for testing.
 
-    Hierarchical permission quelling only work downwards, thus an Account cannot
-    use a higher-permission Character to escalate their permission level.
-    Use the unquell command to revert back to normal operation.
+      Hierarchical permission quelling only work downwards, thus an Account cannot
+      use a higher-permission Character to escalate their permission level.
+      Use the unquell command to revert back to normal operation.
 
     Note: If quelled permission is higher than Account permissions, the lowest
           of the two will be used.

@@ -12,7 +12,6 @@ inheritance.
 """
 from evennia import DefaultObject
 
-
 class Object(DefaultObject):
     """
     This is the root typeclass object, implementing an in-game Evennia
@@ -157,6 +156,6 @@ class Object(DefaultObject):
      at_say(speaker, message)  - by default, called if an object inside this
                                  object speaks
 
-     """
+    """
 
-    pass
+    

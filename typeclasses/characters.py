@@ -7,7 +7,10 @@ is setup to be the "default" character type created by the default
 creation commands.
 
 """
+import re
 from evennia import DefaultCharacter
+from evennia.utils.ansi import strip_ansi
+from server.utils.wrap import wrap
 
 
 class Character(DefaultCharacter):
@@ -59,5 +62,32 @@ class Character(DefaultCharacter):
                 self.location.for_contents(message, exclude=[self], from_obj=self)
                 self.db.prelogout_location = self.location
                 self.location = None
+
+    def at_say(self, message, target=None, targeted=False):
+        #Capitalize the message and strip final space
+        #message = message.capitalize().strip()
+
+        #Ensure message ends appropriately.
+        if not message.endswith((".", "!", "?")):
+            message = message + "."
+
+        if targeted:
+            self_text = f'You say to {target}, "'
+            room_text = f'{self} says to {target}, "'
+            targ_text = f'{self} says to you, "'
+
+            targ_msg = wrap(message, pre_text = targ_text) + '"'
+            target.msg(targ_msg)
+
+        else:
+            self_text = f'You say, "'
+            room_text = f'{self} says, "'
+
+        self_msg = wrap(message, pre_text = self_text) + '"'
+        self.msg(self_msg)
+
+        room_msg = wrap(message, pre_text = room_text) + '"'
+        self.location.msg_contents(room_msg, exclude =(self, target))
+
 
     pass
