@@ -3,6 +3,7 @@ from commands.command import Command
 from django.conf import settings
 from evennia import CmdSet
 from evennia.utils import evtable, utils
+from evennia.utils.ansi import strip_ansi
 
 class CharacterCmdSet(CmdSet):
     """
@@ -355,6 +356,9 @@ class CmdSay(Command):
 
         if not self.args:
             caller.msg("Say what?")
+
+        if not caller.account.is_superuser:
+            speech = strip_ansi(speech)
 
         #Call at_before_say
         speech = caller.at_before_say(speech)
