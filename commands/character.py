@@ -317,7 +317,13 @@ class CmdLook(Command):
 class CmdSay(Command):
     """
     Command:
-      say <message>
+      say  <message>              Speak in a normal voice.
+      lsay <message>              Speak in a loud voice.
+      qsay <message>              Speak in a quiet voice.
+
+      say to <person> <message>   Speak to someone specifically.
+      lsay to <person> <message>  Speak to someone loudly.
+      qsay to <person> <message>  Speak to someone quietly.
 
     Usage:
       Talk to those in your current location.
@@ -353,9 +359,13 @@ class CmdSay(Command):
         volume = self.volume
         target = self.target
         
-
         if not self.args:
             caller.msg("Say what?")
+            return
+
+        if caller == target:
+            caller.msg("You talk to yourself like a moron.")
+            caller.location.msg_contents(f"{caller} talks to themselves like a moron.", exclude = caller)
             return
 
         if not caller.account.is_superuser:

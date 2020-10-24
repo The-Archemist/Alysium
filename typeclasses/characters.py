@@ -67,74 +67,147 @@ class Character(DefaultCharacter):
         #Capitalize the speech and strip final space
 
         #Ensure speech ends appropriately.
-        if not speech.endswith((".", "!", "?", ".'", '."')):
+        if not speech.endswith((".", "!", "?", ".'", '."', "!'", '!"', "?'", '?"')):
             speech = speech + "."
 
         prefixes = {
-            "self" : {
-                "normal" : f'You say, "',
-                "loud"   : f'You loudly say, "',
-                "quiet"  : f'You quietly say, "'
-            },
+            "all" : {
+                "say" : {            
+                    "self" : {
+                        "normal" : f'You say, "',
+                        "loud"   : f'You loudly say, "',
+                        "quiet"  : f'You quietly say, "'
+                    },
 
-            "room" : {
-                "normal" : f'{self} says, "',
-                "loud"   : f'{self} loudly says, "',
-                "quiet"  : f'{self} quietly says, "'
-            }
+                    "room" : {
+                        "normal" : f'{self} says, "',
+                        "loud"   : f'{self} loudly says, "',
+                        "quiet"  : f'{self} quietly says, "'
+                    }
+                },
 
-        }
+                "exclaim" : {
+                    "self" : {
+                        "normal" : f'You exclaim, "',
+                        "loud"   : f'You loudly exclaim, "',
+                        "quiet"  : f'You quietly claim, "'
+                    },
 
-        target_prefixes = {
-            "self" : {
-                "normal" : f'You say to {target}, "',
-                "loud"   : f'You loudly say to {target}, "',
-                "quiet"  : f'You quietly say to {target}, "'
-            },
+                    "room" : {
+                        "normal" : f'{self} exclaims, "',
+                        "loud"   : f'{self} loudly exclaims, "',
+                        "quiet"  : f'{self} quietly exclaims, "'
+                    }
+                },
 
-            "room" : {
-                "normal" : f'{self} says to {target}, "',
-                "loud"   : f'{self} loudly says to {target}, "',
-                "quiet"  : f'{self} quietly says to {target}, "'
+                "ask" : {
+                    "self" : {
+                        "normal" : f'You ask, "',
+                        "loud"   : f'You loudly ask, "',
+                        "quiet"  : f'You quietly ask, "'
+                    },
+
+                    "room" : {
+                        "normal" : f'{self} asks, "',
+                        "loud"   : f'{self} loudly asks, "',
+                        "quiet"  : f'{self} quietly asks, "'
+                    }
+                }
             },
 
             "target" : {
-                "normal" : f'{self} says to you, "',
-                "loud"   : f'{self} loudly says to you, "',
-                "quiet"  : f'{self} quietly says to you, "'
+                "say" : {            
+                    "self" : {
+                        "normal" : f'You say to {target}, "',
+                        "loud"   : f'You loudly says to {target}, "',
+                        "quiet"  : f'You quietly says to {target}, "'
+                    },
+
+                    "room" : {
+                        "normal" : f'{self} says to {target}, "',
+                        "loud"   : f'{self} loudly says to {target}, "',
+                        "quiet"  : f'{self} quietly says to {target}, "'
+                    },
+
+                    "target" : {
+                        "normal" : f'{self} says to you, "',
+                        "loud"   : f'{self} loudly says to you, "',
+                        "quiet"  : f'{self} quietly says to you, "'
+                    }
+                },
+
+                "exclaim" : {
+                    "self" : {
+                        "normal" : f'You exclaim to {target}, "',
+                        "loud"   : f'You loudly exclaim to {target}, "',
+                        "quiet"  : f'You quietly claim to {target}, "'
+                    },
+
+                    "room" : {
+                        "normal" : f'{self} exclaims to {target}, "',
+                        "loud"   : f'{self} loudly exclaims to {target}, "',
+                        "quiet"  : f'{self} quietly exclaims to {target}, "'
+                    },
+
+                    "target" : {
+                        "normal" : f'{self} exclaims to you, "',
+                        "loud"   : f'{self} loudly exclaims to you, "',
+                        "quiet"  : f'{self} quietly exclaims to you, "'
+                    }
+                },
+
+                "ask" : {
+                    "self" : {
+                        "normal" : f'You ask {target}, "',
+                        "loud"   : f'You loudly ask {target}, "',
+                        "quiet"  : f'You quietly ask {target}, "'
+                    },
+
+                    "room" : {
+                        "normal" : f'{self} asks {target}, "',
+                        "loud"   : f'{self} loudly asks {target}, "',
+                        "quiet"  : f'{self} quietly asks {target}, "'
+                    },
+
+                    "target" : {
+                        "normal" : f'{self} asks you, "',
+                        "loud"   : f'{self} loudly asks you, "',
+                        "quiet"  : f'{self} quietly asks you, "'
+                    }
+                }               
             }
         }
 
         if not target:
-            if volume in ("say", "'"):
-                self_text = prefixes['self']['normal']
-                room_text = prefixes['room']['normal']
-            elif volume in ('lsay', '"'):
-                self_text = prefixes['self']['loud']
-                room_text = prefixes['room']['loud']
-            else:
-                self_text = prefixes['self']['quiet']
-                room_text = prefixes['room']['quiet']
+            prefix_1 = "all"
         else:
-            if volume in ("say", "'"):
-                self_text   = target_prefixes['self']['normal']
-                room_text   = target_prefixes['room']['normal']
-                target_text = target_prefixes['target']['normal']
-            elif volume in ('lsay', '"'):
-                self_text   = target_prefixes['self']['loud']
-                room_text   = target_prefixes['room']['loud']
-                target_text = target_prefixes['target']['loud']
-            else:
-                self_text   = target_prefixes['self']['quiet']
-                room_text   = target_prefixes['room']['quiet']
-                target_text = target_prefixes['target']['quiet']
+            prefix_1 = "target"
+
+        if speech.endswith(("!", "!'", '!"')):
+            prefix_2 = "exclaim"
+        elif speech.endswith(("?", "?'", '?"')):
+            prefix_2 = "ask"
+        else:
+            prefix_2 = "say"
+
+        if volume in ("lsay", '"'):
+            prefix_3 = "loud"
+        elif volume == "qsay":
+            prefix_3 = "quiet"
+        else:
+            prefix_3 = "normal"
+
+        self_text = prefixes[prefix_1][prefix_2]["self"][prefix_3]
+        room_text = prefixes[prefix_1][prefix_2]["room"][prefix_3]
 
         self_speech = wrap(speech, pre_text = self_text) + '"'
         room_speech = wrap(speech, pre_text = room_text) + '"'
         self.msg(self_speech)
         self.location.msg_contents(room_speech, exclude = (self, target))
         if target:
+            target_text = prefixes[prefix_1][prefix_2]["target"][prefix_3]
             target_speech = wrap(speech, pre_text = target_text) + '"'
             target.msg(target_speech)
+
 
     pass
