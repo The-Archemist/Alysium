@@ -3,7 +3,7 @@ from commands.command import Command
 
 class AdminCmdSet(CmdSet):
     """
-    Implements the account command set. Used for universal commands.
+    Implements the admin command set. Used for universal commands.
     """
 
     key = "AdminCommands"

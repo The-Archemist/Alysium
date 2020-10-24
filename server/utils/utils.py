@@ -4,7 +4,7 @@ from django.conf import settings
 from evennia.utils.ansi import strip_ansi
 from evennia.utils.utils import to_str
 
-def wrap(text, width = None, pre_text = None, indent = 0):
+def wrap(text, width = None, pre_text = "", indent = 0):
     """
     Safely wrap text to a certain number of characters.
 

@@ -4,11 +4,11 @@ from django.conf import settings
 from evennia import CmdSet
 from evennia.utils import evtable, utils
 from evennia.utils.ansi import strip_ansi
-from server.utils.wrap import wrap
+from server.utils.utils import wrap
 
 class CharacterCmdSet(CmdSet):
     """
-    Implements the account command set. Used for universal commands.
+    Implements the character command set. Used for universal commands.
     """
 
     key = "CharacterCommands"
@@ -88,7 +88,7 @@ class CmdDrop(Command):
             caller.location.msg_contents(f"{caller.name} drops {obj.name}.", exclude=caller)
 
             # Call the object script's at_drop() method.
-            obj.at_drop(caller)
+            obj.at_drop(caller)        
 
 
 class CmdGet(Command):
@@ -159,6 +159,7 @@ class CmdGet(Command):
             
             #call at_get hook
             obj.at_get(caller)
+
 
 class CmdGive(Command):
     """
@@ -232,6 +233,7 @@ class CmdGive(Command):
         #Call object's at_give script
         obj.at_give(caller, target)
 
+
 class CmdInventory(Command):
     """
     Command:
@@ -275,6 +277,7 @@ class CmdInventory(Command):
 
         caller.msg(string)
 
+
 class CmdLook(Command):
     """
     Command:
@@ -315,6 +318,7 @@ class CmdLook(Command):
                     return
 
         caller.msg((caller.at_look(target), {"type": "look"}), options=None)
+
 
 class CmdSay(Command):
     """
@@ -382,6 +386,7 @@ class CmdSay(Command):
         #Call at_after_say
         caller.at_say(speech, volume, target)
 
+
 class CmdWhisper(Command):
     """
     Command:
@@ -423,9 +428,12 @@ class CmdWhisper(Command):
             return
 
         if caller == target:
-            caller.msg("You whisper discretely to yourself.")
-            caller.location.msg_contents(f"{caller} whispers discretely to themself.", exclude = caller)
+            caller.msg("You whisper yourself.")
+            caller.location.msg_contents(f"{caller} whispers themself.", exclude = caller)
             return
+
+        if not caller.account.is_superuser:
+            speech = strip_ansi(speech)
 
         #call at_before_say hook
         speech = caller.at_before_say(speech, whisper=True)

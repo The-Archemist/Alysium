@@ -10,7 +10,7 @@ creation commands.
 import re
 from evennia import DefaultCharacter
 from evennia.utils.ansi import strip_ansi
-from server.utils.wrap import wrap
+from server.utils.utils import wrap
 
 
 class Character(DefaultCharacter):
@@ -69,6 +69,8 @@ class Character(DefaultCharacter):
         #Ensure speech ends appropriately.
         if not speech.endswith((".", "!", "?", ".'", '."', "!'", '!"', "?'", '?"')):
             speech = speech + "."
+
+        speech = grammarize(speech)
 
         prefixes = {
             #Target Prefixes - All
