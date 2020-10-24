@@ -179,33 +179,33 @@ class Character(DefaultCharacter):
         }
 
         if not target:
-            prefix_1 = "all"
+            target_prefix = "all"
         else:
-            prefix_1 = "target"
+            target_prefix = "target"
 
         if speech.endswith(("!", "!'", '!"')):
-            prefix_2 = "exclaim"
+            inflection_prefix = "exclaim"
         elif speech.endswith(("?", "?'", '?"')):
-            prefix_2 = "ask"
+            inflection_prefix = "ask"
         else:
-            prefix_2 = "say"
+            inflection_prefix = "say"
 
         if volume in ("lsay", '"'):
-            prefix_3 = "loud"
+            volume_prefix = "loud"
         elif volume == "qsay":
-            prefix_3 = "quiet"
+            volume_prefix = "quiet"
         else:
-            prefix_3 = "normal"
+            volume_prefix = "normal"
 
-        self_text = prefixes[prefix_1][prefix_2]["self"][prefix_3]
-        room_text = prefixes[prefix_1][prefix_2]["room"][prefix_3]
+        self_text = prefixes[target_prefix][inflection_prefix]["self"][volume_prefix]
+        room_text = prefixes[target_prefix][inflection_prefix]["room"][volume_prefix]
 
         self_speech = wrap(speech, pre_text = self_text) + '"'
         room_speech = wrap(speech, pre_text = room_text) + '"'
         self.msg(self_speech)
         self.location.msg_contents(room_speech, exclude = (self, target))
         if target:
-            target_text = prefixes[prefix_1][prefix_2]["target"][prefix_3]
+            target_text = prefixes[target_prefix][inflection_prefix]["target"][volume_prefix]
             target_speech = wrap(speech, pre_text = target_text) + '"'
             target.msg(target_speech)
 
