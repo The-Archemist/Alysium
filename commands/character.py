@@ -4,6 +4,7 @@ from django.conf import settings
 from evennia import CmdSet
 from evennia.utils import evtable, utils
 from evennia.utils.ansi import strip_ansi
+from server.utils.wrap import wrap
 
 class CharacterCmdSet(CmdSet):
     """
@@ -22,6 +23,7 @@ class CharacterCmdSet(CmdSet):
         self.add(CmdInventory())
         self.add(CmdLook())
         self.add(CmdSay())
+        self.add(CmdWhisper())
 
 class CmdDrop(Command):
     """
@@ -379,3 +381,67 @@ class CmdSay(Command):
 
         #Call at_after_say
         caller.at_say(speech, volume, target)
+
+class CmdWhisper(Command):
+    """
+    Command:
+      whisper <target> <message>
+      whisper to <target> <message>
+
+    Usage:
+      Talk privately to someone in your current location.
+    """
+
+    key = "whisper"
+    locks = "cmd:all()"
+
+    def parse(self):
+        self.args = self.args.strip()
+        self.target = None
+        self.speech = None
+
+        #match.group(1) = target
+        #match.group(2) = speech
+        match = re.search(r"^(?:to)?\s*(\S+)(.*)$", self.args)
+        if match is not None:
+            self.target = match.group(1)
+            self.speech = match.group(2).strip()
+
+    def func(self):
+        """Implement whisper command"""
+        caller = self.caller
+        target = self.target
+        target = caller.search(target)
+        speech = self.speech
+
+        if not target:
+            caller.msg("Whisper to who?")
+            return
+
+        if not speech:
+            caller.msg("Whisper what?")
+            return
+
+        if caller == target:
+            caller.msg("You whisper discretely to yourself.")
+            caller.location.msg_contents(f"{caller} whispers discretely to themself.", exclude = caller)
+            return
+
+        #call at_before_say hook
+        speech = caller.at_before_say(speech, whisper=True)
+
+        #whisper prefixes
+        self_text = f'You whisper to {target}, "'
+        room_text = f'{caller} whispers to {target}, "'
+        target_text = f'{caller} whispers to you, "'
+
+        #wrap the text
+        self_speech   = wrap(speech, pre_text = self_text)   + '"'
+        room_speech   = wrap(speech, pre_text = room_text)   + '"'
+        target_speech = wrap(speech, pre_text = target_text) + '"'
+
+        #deliver text
+        caller.msg(self_speech)
+        target.msg(target_speech)
+        caller.location.msg_contents(room_speech, exclude = (caller, target))
+

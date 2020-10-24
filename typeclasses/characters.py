@@ -71,43 +71,59 @@ class Character(DefaultCharacter):
             speech = speech + "."
 
         prefixes = {
+            #Target Prefixes - All
             "all" : {
-                "say" : {            
+                #Inflection Prefixes - Say
+                "say" : {     
+                    #Message Type       
                     "self" : {
+                        #Volume Prefixes
                         "normal" : f'You say, "',
                         "loud"   : f'You loudly say, "',
                         "quiet"  : f'You quietly say, "'
                     },
 
+                    #Message Type 
                     "room" : {
+                        #Volume Prefixes
                         "normal" : f'{self} says, "',
                         "loud"   : f'{self} loudly says, "',
                         "quiet"  : f'{self} quietly says, "'
                     }
                 },
 
+                #Inflection Prefixes - Say
                 "exclaim" : {
+                    #Message Type 
                     "self" : {
+                        #Volume Prefixes
                         "normal" : f'You exclaim, "',
                         "loud"   : f'You loudly exclaim, "',
                         "quiet"  : f'You quietly claim, "'
                     },
 
+                    #Message Type 
                     "room" : {
+                        #Volume Prefixes
                         "normal" : f'{self} exclaims, "',
                         "loud"   : f'{self} loudly exclaims, "',
                         "quiet"  : f'{self} quietly exclaims, "'
                     }
                 },
-
+                
+                #Inflection Prefixes - Say
                 "ask" : {
+                    #Message Type 
                     "self" : {
+                        #Volume Prefixes
                         "normal" : f'You ask, "',
                         "loud"   : f'You loudly ask, "',
                         "quiet"  : f'You quietly ask, "'
                     },
 
+                    #Message Type 
                     "room" : {
+                        #Volume Prefixes
                         "normal" : f'{self} asks, "',
                         "loud"   : f'{self} loudly asks, "',
                         "quiet"  : f'{self} quietly asks, "'
@@ -115,61 +131,83 @@ class Character(DefaultCharacter):
                 }
             },
 
+            #Target Prefixes - Targeted
             "target" : {
-                "say" : {            
+                #Inflection Prefixes - Say
+                "say" : {      
+                    #Message Type       
                     "self" : {
+                        #Volume Prefixes
                         "normal" : f'You say to {target}, "',
                         "loud"   : f'You loudly says to {target}, "',
                         "quiet"  : f'You quietly says to {target}, "'
                     },
-
+                    
+                    #Message Type 
                     "room" : {
+                        #Volume Prefixes
                         "normal" : f'{self} says to {target}, "',
                         "loud"   : f'{self} loudly says to {target}, "',
                         "quiet"  : f'{self} quietly says to {target}, "'
                     },
 
+                    #Message Type 
                     "target" : {
+                        #Volume Prefixes
                         "normal" : f'{self} says to you, "',
                         "loud"   : f'{self} loudly says to you, "',
                         "quiet"  : f'{self} quietly says to you, "'
                     }
                 },
 
+                #Inflection Prefixes - Exclaim
                 "exclaim" : {
+                    #Message Type 
                     "self" : {
+                        #Volume Prefixes
                         "normal" : f'You exclaim to {target}, "',
                         "loud"   : f'You loudly exclaim to {target}, "',
                         "quiet"  : f'You quietly claim to {target}, "'
                     },
 
+                    #Message Type 
                     "room" : {
+                        #Volume Prefixes
                         "normal" : f'{self} exclaims to {target}, "',
                         "loud"   : f'{self} loudly exclaims to {target}, "',
                         "quiet"  : f'{self} quietly exclaims to {target}, "'
                     },
 
+                    #Message Type 
                     "target" : {
+                        #Volume Prefixes
                         "normal" : f'{self} exclaims to you, "',
                         "loud"   : f'{self} loudly exclaims to you, "',
                         "quiet"  : f'{self} quietly exclaims to you, "'
                     }
                 },
 
+                #Inflection Prefixes - Ask
                 "ask" : {
+                    #Message Type 
                     "self" : {
+                        #Volume Prefixes
                         "normal" : f'You ask {target}, "',
                         "loud"   : f'You loudly ask {target}, "',
                         "quiet"  : f'You quietly ask {target}, "'
                     },
 
+                    #Message Type 
                     "room" : {
+                        #Volume Prefixes
                         "normal" : f'{self} asks {target}, "',
                         "loud"   : f'{self} loudly asks {target}, "',
                         "quiet"  : f'{self} quietly asks {target}, "'
                     },
 
+                    #Message Type 
                     "target" : {
+                        #Volume Prefixes
                         "normal" : f'{self} asks you, "',
                         "loud"   : f'{self} loudly asks you, "',
                         "quiet"  : f'{self} quietly asks you, "'
