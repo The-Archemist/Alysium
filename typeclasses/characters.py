@@ -63,31 +63,78 @@ class Character(DefaultCharacter):
                 self.db.prelogout_location = self.location
                 self.location = None
 
-    def at_say(self, message, target=None, targeted=False):
-        #Capitalize the message and strip final space
-        #message = message.capitalize().strip()
+    def at_say(self, speech, volume="say", target=None):
+        #Capitalize the speech and strip final space
 
-        #Ensure message ends appropriately.
-        if not message.endswith((".", "!", "?")):
-            message = message + "."
+        #Ensure speech ends appropriately.
+        if not speech.endswith((".", "!", "?", ".'", '."')):
+            speech = speech + "."
 
-        if targeted:
-            self_text = f'You say to {target}, "'
-            room_text = f'{self} says to {target}, "'
-            targ_text = f'{self} says to you, "'
+        prefixes = {
+            "self" : {
+                "normal" : f'You say, "',
+                "loud"   : f'You loudly say, "',
+                "quiet"  : f'You quietly say, "'
+            },
 
-            targ_msg = wrap(message, pre_text = targ_text) + '"'
-            target.msg(targ_msg)
+            "room" : {
+                "normal" : f'{self} says, "',
+                "loud"   : f'{self} loudly says, "',
+                "quiet"  : f'{self} quietly says, "'
+            }
 
+        }
+
+        target_prefixes = {
+            "self" : {
+                "normal" : f'You say to {target}, "',
+                "loud"   : f'You loudly say to {target}, "',
+                "quiet"  : f'You quietly say to {target}, "'
+            },
+
+            "room" : {
+                "normal" : f'{self} says to {target}, "',
+                "loud"   : f'{self} loudly says to {target}, "',
+                "quiet"  : f'{self} quietly says to {target}, "'
+            },
+
+            "target" : {
+                "normal" : f'{self} says to you, "',
+                "loud"   : f'{self} loudly says to you, "',
+                "quiet"  : f'{self} quietly says to you, "'
+            }
+        }
+
+        if not target:
+            if volume in ("say", "'"):
+                self_text = prefixes['self']['normal']
+                room_text = prefixes['room']['normal']
+            elif volume in ('lsay', '"'):
+                self_text = prefixes['self']['loud']
+                room_text = prefixes['room']['loud']
+            else:
+                self_text = prefixes['self']['quiet']
+                room_text = prefixes['room']['quiet']
         else:
-            self_text = f'You say, "'
-            room_text = f'{self} says, "'
+            if volume in ("say", "'"):
+                self_text   = target_prefixes['self']['normal']
+                room_text   = target_prefixes['room']['normal']
+                target_text = target_prefixes['target']['normal']
+            elif volume in ('lsay', '"'):
+                self_text   = target_prefixes['self']['loud']
+                room_text   = target_prefixes['room']['loud']
+                target_text = target_prefixes['target']['loud']
+            else:
+                self_text   = target_prefixes['self']['quiet']
+                room_text   = target_prefixes['room']['quiet']
+                target_text = target_prefixes['target']['quiet']
 
-        self_msg = wrap(message, pre_text = self_text) + '"'
-        self.msg(self_msg)
-
-        room_msg = wrap(message, pre_text = room_text) + '"'
-        self.location.msg_contents(room_msg, exclude =(self, target))
-
+        self_speech = wrap(speech, pre_text = self_text) + '"'
+        room_speech = wrap(speech, pre_text = room_text) + '"'
+        self.msg(self_speech)
+        self.location.msg_contents(room_speech, exclude = (self, target))
+        if target:
+            target_speech = wrap(speech, pre_text = target_text) + '"'
+            target.msg(target_speech)
 
     pass

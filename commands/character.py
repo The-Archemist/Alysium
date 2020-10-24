@@ -324,14 +324,14 @@ class CmdSay(Command):
     """
 
     key = "say"
-    aliases = ["'"]
+    aliases = ["'", "lsay", '"', "qsay"]
     locks = "cmd:all()"
 
     def parse(self):
         self.args = self.args.strip()
         self.target = None
         self.speech = None
-        self.targeted = False
+        self.volume = self.cmdstring
 
         #match.group(1) = to if exists
         #match.group(2) = target if to exists else message
@@ -342,7 +342,6 @@ class CmdSay(Command):
                 target = match.group(2)
                 self.target = self.caller.search(target, nofound_string="To who?")
                 self.speech = match.group(3).strip()
-                self.targeted = True
             else:
                 self.speech = (match.group(2) + match.group(3)).strip()
                 
@@ -350,12 +349,14 @@ class CmdSay(Command):
         """Impelement say command"""
 
         caller = self.caller
-        target = self.target
         speech = self.speech
-        targeted = self.targeted
+        volume = self.volume
+        target = self.target
+        
 
         if not self.args:
             caller.msg("Say what?")
+            return
 
         if not caller.account.is_superuser:
             speech = strip_ansi(speech)
@@ -367,4 +368,4 @@ class CmdSay(Command):
             return
 
         #Call at_after_say
-        caller.at_say(speech, target, targeted)
+        caller.at_say(speech, volume, target)
