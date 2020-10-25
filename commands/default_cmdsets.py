@@ -15,7 +15,7 @@ own cmdsets by inheriting from them or directly from `evennia.CmdSet`.
 """
 
 from evennia import default_cmds
-from commands import account, admin, character, emote
+from commands import account, admin, character, social
 
 
 class AccountCmdSet(default_cmds.AccountCmdSet):
@@ -57,7 +57,7 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         # any commands you add below will overload the default ones.
         #
         self.add(character.CharacterCmdSet())
-        self.add(emote.EmoteCmdSet())
+        self.add(social.SocialCmdSet())
 
 
 class UnloggedinCmdSet(default_cmds.UnloggedinCmdSet):

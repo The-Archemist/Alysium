@@ -25,8 +25,9 @@ line to your settings file:
 
 """
 
+from django.utils.translation import gettext as _
 
-def at_search_result(matches, caller, query="", quiet=False, **kwargs):
+def at_search_result(matches, caller, query="", quiet=False, nofound_string="", **kwargs):
     """
     This is a generic hook for handling all processing of a search
     result, including error reporting.
@@ -52,3 +53,44 @@ def at_search_result(matches, caller, query="", quiet=False, **kwargs):
             already have happened.
 
     """
+
+    error = ""
+    if not matches:
+        # no results.
+        error = nofound_string
+        #error = kwargs.get("nofound_string") or _("Could not find '%s'." % query)
+        matches = None
+    elif len(matches) > 1:
+        multimatch_string = kwargs.get("multimatch_string")
+        if multimatch_string:
+            error = "%s\n" % multimatch_string
+        else:
+            error = _("More than one match for '{query}' (please narrow target):\n").format(
+                query=query
+            )
+
+        for num, result in enumerate(matches):
+            # we need to consider Commands, where .aliases is a list
+            aliases = result.aliases.all() if hasattr(result.aliases, "all") else result.aliases
+            # remove any pluralization aliases
+            aliases = [
+                alias
+                for alias in aliases
+                if hasattr(alias, "category") and alias.category not in ("plural_key",)
+            ]
+            error += _MULTIMATCH_TEMPLATE.format(
+                number=num + 1,
+                name=result.get_display_name(caller)
+                if hasattr(result, "get_display_name")
+                else query,
+                aliases=" [%s]" % ";".join(aliases) if aliases else "",
+                info=result.get_extra_info(caller),
+            )
+        matches = None
+    else:
+        # exactly one match
+        matches = matches[0]
+
+    if error and not quiet:
+        caller.msg(error.strip())
+    return matches

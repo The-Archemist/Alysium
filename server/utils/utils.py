@@ -4,6 +4,16 @@ from django.conf import settings
 from evennia.utils.ansi import strip_ansi
 from evennia.utils.utils import to_str
 
+def grammarize(text, ending='.'):
+    text = text.strip()
+    if not text.endswith((".", "!", "?", ".'", "!'", "?'", '."', '!"', '?"')):
+        text += ending
+
+    if text[-2] == " ":
+        text = text[:-2] + text[-1]
+        
+    return text
+
 def wrap(text, width = None, pre_text = "", indent = 0):
     """
     Safely wrap text to a certain number of characters.

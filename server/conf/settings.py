@@ -34,7 +34,7 @@ from evennia.settings_default import *
 # This is the name of your game. Make it catchy!
 SERVERNAME = "Alysium"
 HELP_MORE = False
-
+SEARCH_AT_RESULT = "server.conf.at_search.at_search_result"
 
 ######################################################################
 # Settings given in secret_settings.py override those in this file.

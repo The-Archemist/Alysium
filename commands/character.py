@@ -8,7 +8,7 @@ from server.utils.utils import wrap
 
 class CharacterCmdSet(CmdSet):
     """
-    Implements the character command set. Used for universal commands.
+    Implements the character command set.
     """
 
     key = "CharacterCommands"
@@ -16,7 +16,7 @@ class CharacterCmdSet(CmdSet):
     def at_cmdset_creation(self):
         "Populates the cmdset"
 
-        # Account-specific commands
+        # Character-specific commands
         self.add(CmdDrop())
         self.add(CmdGet())
         self.add(CmdGive())
@@ -24,6 +24,11 @@ class CharacterCmdSet(CmdSet):
         self.add(CmdLook())
         self.add(CmdSay())
         self.add(CmdWhisper())
+
+        # Emote-specific Commands
+        self.add(CmdEmote())
+        self.add(CmdOmote())
+        self.add(CmdPmote())
 
 class CmdDrop(Command):
     """
@@ -89,6 +94,43 @@ class CmdDrop(Command):
 
             # Call the object script's at_drop() method.
             obj.at_drop(caller)        
+
+
+class CmdEmote(Command):
+    """
+    Command:
+      emote <text>               
+      ;<text>                     
+
+    Usage:
+      Convey an action made by your character.
+
+    Example: emote gathers you up into a hug.
+    Appears: Hailey gathers you up into a hug.
+    """
+
+    key = "emote"
+    locks = "cmd:all()"
+    help_category = "Communication"
+
+    def func(self):
+        """Implement emotes"""
+        caller = self.caller
+        emote = self.args.strip()
+
+        if not emote:
+            caller.msg("Emote what?")
+            return
+                
+        if not caller.account.is_superuser:
+            emote = strip_ansi(emote)
+        
+        if not emote.endswith((".", "!", "?", ".'", "!'", "?'", '."', '!"', '?"')):
+            emote += '.'
+
+        emote = f"->{caller} {emote}"
+        emote = wrap(emote)
+        caller.location.msg_contents(emote)
 
 
 class CmdGet(Command):
@@ -183,7 +225,7 @@ class CmdGive(Command):
         #match.group(1) = quantity
         #match.group(2) = object
         #match.group(3) = target
-        match = re.search(r"^(\d+)?\s?(\S+) to (\S+)$", self.args)
+        match = re.search(r"^(\d+)?\s?(\S+)\s*?to\s*?(\S+)$", self.args)
         if match is not None:
             #self.quantity = match.group(1)
             self.object   = match.group(2)
@@ -207,7 +249,7 @@ class CmdGive(Command):
             multimatch_string = f"You are carrying more than one {obj}:"
         )
 
-        target = caller.search(target)
+        target = caller.search(target, nofound_string = f"You cannot find {target.capitalize()}.")
         if not (obj and target):
             return
         
@@ -315,9 +357,104 @@ class CmdLook(Command):
             else:
                 target = caller.search(self.args.strip())
                 if not target:
+                    target = self.args.strip()
+                    caller.msg(f"You do not see {target} here.")
                     return
 
         caller.msg((caller.at_look(target), {"type": "look"}), options=None)
+
+
+class CmdOmote(Command):
+    """
+    Command:
+      omote <text> with ; representing your character
+
+    Usage:
+      The optional emote places your name somewhere within the written action.
+      A semi-colon or your name are required for an omote to function.
+
+    Example: omote Without so much as a word, ; gathers you up into a hug.
+    Appears: Without so much as a word, Hailey gathers you up into a hug.
+
+    Notes: Omotes are not possible in tells or channels. Use standard emotes
+           for these modes of communication.
+
+           Using omote to power emote another character is against the rules.
+    """
+      
+    key = "omote"
+    locks = "cmd:all()"
+    help_category = "Communication"
+
+    def func(self):
+        """Implement omotes"""
+        caller = self.caller
+        omote = self.args.strip()
+
+        if not omote:
+            caller.msg("Omote what?")
+            return
+
+        if not caller.account.is_superuser:
+            omote = strip_ansi(omote)
+
+        if not caller.name in omote:
+            if ";" in omote:
+                omote = omote.replace(';', caller.name, 1)
+            elif not caller.account.is_superuser:
+                caller.msg("Syntax: omote <text> with ; representing your character.")
+                return
+
+        if not omote.endswith((".", "!", "?", ".'", "!'", "?'", '."', '!"', '?"')):
+            omote += '.'
+        
+        omote = f"->{omote}"
+        omote = wrap(omote)
+        caller.location.msg_contents(omote)
+
+
+class CmdPmote(Command):
+    """
+    Command:
+      pmote <text>
+
+    Usage:
+      The possessive emote attaches an apostrophy to your name to convey a
+      possessive form.
+
+    Example: pmote hug squeezes so hard you might pop!
+    Appears: Hailey's hug squeezes so hard you might pop!
+    
+    Notes: pmote will start the emote with your name in a possessive fashion.
+           To convey possession in the middle of an action, use omote.
+
+           Pmotes are not possible in tells or channels. Use standard emotes
+           for those modes of communication.
+
+    """
+
+    key = "pmote"
+    locks = "cmd:all()"
+    help_category = "Communication"
+
+    def func(self):
+        """Implement pmotes"""
+        caller = self.caller
+        pmote = self.args.strip()
+
+        if not pmote:
+            caller.msg("Pmote what?")
+            return
+
+        if not caller.account.is_superuser:
+            pmote = strip_ansi(pmote)
+
+        if not pmote.endswith((".", "!", "?", ".'", "!'", "?'", '."', '!"', '?"')):
+            pmote += '.'
+
+        pmote = f"->{caller}'s {pmote}"
+        pmote = wrap(pmote)
+        caller.location.msg_contents(pmote)
 
 
 class CmdSay(Command):
@@ -353,7 +490,7 @@ class CmdSay(Command):
         if match is not None:
             if match.group(1) is not None:
                 target = match.group(2)
-                self.target = self.caller.search(target, nofound_string="To who?")
+                self.target = self.caller.search(target)
                 self.speech = match.group(3).strip()
             else:
                 self.speech = (match.group(2) + match.group(3)).strip()
@@ -383,6 +520,14 @@ class CmdSay(Command):
 
         if not speech:
             return
+
+        #Force capitalization
+        if speech[0].isalpha():
+            speech = speech[0].upper() + speech[1:]
+        elif speech[2].isalpha():
+            speech = speech[0:2] + speech[2].upper() + speech[3:]
+        elif speech[4].isalpha():
+            speech = speech[0:4] + speech[4].upper() + speech[5:]
 
         #Call at_after_say
         caller.at_say(speech, volume, target)
@@ -442,16 +587,20 @@ class CmdWhisper(Command):
 
         #whisper prefixes
         self_text = f'You whisper to {target}, "'
-        room_text = f'{caller} whispers to {target}, "'
+        room_text = f'{caller} whispers to {target}.'
         target_text = f'{caller} whispers to you, "'
 
         #wrap the text
         self_speech   = wrap(speech, pre_text = self_text)   + '"'
-        room_speech   = wrap(speech, pre_text = room_text)   + '"'
         target_speech = wrap(speech, pre_text = target_text) + '"'
 
         #deliver text
         caller.msg(self_speech)
         target.msg(target_speech)
-        caller.location.msg_contents(room_speech, exclude = (caller, target))
+        caller.location.msg_contents(room_text, exclude = (caller, target))
+
+
+
+
+
 

@@ -1,0 +1,9 @@
+{
+    "ack" : [
+        "You ack %e",
+        "%n acks %e",
+        "You ack at %t %e",
+        "%n acks at %t %e",
+        "%n acks at you %e"
+    ]
+}
