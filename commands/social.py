@@ -1,10 +1,7 @@
-import json, re
+import re
 from commands.command import Command
 from evennia import CmdSet
 from server.utils.utils import grammarize, wrap
-
-with open('commands\social.json') as socials:
-    socials = json.load(socials)
 
 class SocialCmdSet(CmdSet):
     """
@@ -17,69 +14,53 @@ class SocialCmdSet(CmdSet):
         "Populates the cmdset"
 
         # Social-specific commands
-        self.add(CmdSocial())
+        self.add(CmdAck())
 
-class CmdSocial(Command):
+class CmdAck(Command):
     """
-    Standard:
-    social[0] = self
-    social[1] = room
+    Command:
+      ack
 
-    Targeted:
-    social[2] = self
-    social[3] = room
-    social[4] = target
+    Example: You ack.
     """
 
-    key = ""
-    aliases = [k for k in socials]
+    key = "ack"
+    locks = "cmd:all()"
     auto_help = False
 
     def parse(self):
         self.target = None
-        self.extra  = None
+        self.extra = None
 
-        match = re.match(r"^\s*(\w*)\s*(.*)$", self.args)
+        #match.group(1) = target
+        #match.group(2) = speech
+        match = re.search(r"^\s*(\S+)(.*)$", self.args.strip())
         if match is not None:
             self.target = self.caller.search(match.group(1))
             if self.target:
-                self.extra  = match.group(2)
+                self.extra = match.group(2).strip()
             else:
-                self.extra  = match.group(1) + " " + match.group(2)
+                self.extra = (match.group(1) + match.group(2)).strip()
 
     def func(self):
         caller = self.caller
         target = self.target
-        social = self.cmdstring
-        extra  = self.extra.strip() or ""
+        extra  = self.extra or None
 
-        if not target:
-            self_msg = socials[social][0]
-            room_msg = socials[social][1]
-            msg_list = [self_msg, room_msg]
-        else:
-            self_msg = socials[social][2]
-            room_msg = socials[social][3]
-            targ_msg = socials[social][4]
-            msg_list = [self_msg, room_msg, targ_msg]
+        self_msg = "You ack "
+        room_msg = f"{caller.name} acks "
+        target_msg = f"{caller.name} acks "
 
-        for i, msg in enumerate(msg_list):
-            if not target:
-                msg_list[i] = self.replace_vars(msg, caller.name, extra)
-            else:
-                msg_list[i] = self.replace_vars(msg, caller.name, extra, target.name)
-
-        caller.msg(msg_list[0])
-        caller.location.msg_contents(msg_list[1], exclude = (caller, target))
         if target:
-            target.msg(msg_list[2])
+            self_msg += f"at {target.name} "
+            room_msg += f"at {target.name} "
+            target_msg += "at you "
 
-    def replace_vars(self, text, name, extra, target=None):
-        text = re.sub('%n', name, text)
-        text = re.sub('%e', extra, text)
-        if target:
-            text = re.sub('%t', target, text)
+        if extra:
+            self_msg += extra
+            room_msg += extra
+            target_msg += extra
 
-        text = grammarize(text)
-        return text
+        caller.at_social(self_msg, room_msg, target_msg, target)
+
         

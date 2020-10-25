@@ -498,10 +498,10 @@ class CmdSay(Command):
     def func(self):
         """Impelement say command"""
 
-        caller    = self.caller
-        speech    = self.speech
-        intensity = self.cmdstring
-        target    = self.target
+        caller = self.caller
+        speech = self.speech
+        volume = self.cmdstring
+        target = self.target
         
         if not self.args:
             caller.msg("Say what?")
@@ -530,8 +530,7 @@ class CmdSay(Command):
             speech = speech[0:4] + speech[4].upper() + speech[5:]
 
         #Call at_after_say
-        caller.at_say(speech, intensity, target)
-        #caller.at_say(speech, msg_self=True)
+        caller.at_say(speech, volume, target)
 
 
 class CmdWhisper(Command):
@@ -557,14 +556,13 @@ class CmdWhisper(Command):
         #match.group(2) = speech
         match = re.search(r"^(?:to)?\s*(\S+)(.*)$", self.args)
         if match is not None:
-            self.target = match.group(1)
+            self.target = self.caller.search(match.group(1))
             self.speech = match.group(2).strip()
 
     def func(self):
         """Implement whisper command"""
         caller = self.caller
         target = self.target
-        target = caller.search(target)
         speech = self.speech
 
         if not target:

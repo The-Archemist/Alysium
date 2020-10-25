@@ -34,10 +34,6 @@ class Character(DefaultCharacter):
 
     """
 
-    #def at_before_get(self, getter, **kwargs):
-    #    getter.msg("You cannot get %s." % self)
-    #    return False
-
     def at_post_unpuppet(self, account, session=None, **kwargs):
         """
         We stove away the character when the account goes ooc/logs off,
@@ -66,13 +62,15 @@ class Character(DefaultCharacter):
     def at_say(self, speech, volume, target=None):
         speech = grammarize(speech)
 
-        if volume in ("lsay", '"'):
+        #determine volume prefix
+        if volume in ("say", "'"):
+            volume = ""
+        elif volume in ("lsay", '"'):
             volume = "loudly "
         elif volume == "qsay":
             volume = "quietly "
-        else:
-            volume = ""
 
+        #determine inflection prefix
         if speech.endswith("."):
             self_inflection = "say"
             room_inflection = "says"
@@ -95,6 +93,7 @@ class Character(DefaultCharacter):
                 room_inflection += f" {target}"
                 target_inflection = f"asks you"
 
+        #format & deliver speech
         self_msg = "You " + volume + self_inflection + ', "' 
         self_msg = wrap(speech, pre_text=self_msg) + '"'
         self.msg(self_msg)
@@ -106,6 +105,17 @@ class Character(DefaultCharacter):
         if target:
             target_msg = f"{self} " + volume + target_inflection + ', "'
             target_msg = wrap(speech, pre_text=target_msg) + '"'
+            target.msg(target_msg)
+
+    def at_social(self, self_msg, room_msg, target_msg=None, target=None):
+        self_msg = wrap(grammarize(self_msg))
+        self.msg(self_msg)
+
+        room_msg = wrap(grammarize(room_msg))
+        self.location.msg_contents(room_msg, exclude=(self,target))
+
+        if target:
+            target_msg = wrap(grammarize(target_msg))
             target.msg(target_msg)
 
     pass
