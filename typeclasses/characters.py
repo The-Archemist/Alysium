@@ -70,8 +70,6 @@ class Character(DefaultCharacter):
         if not speech.endswith((".", "!", "?", ".'", '."', "!'", '!"', "?'", '?"')):
             speech = speech + "."
 
-        speech = grammarize(speech)
-
         prefixes = {
             #Target Prefixes - All
             "all" : {

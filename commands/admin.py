@@ -27,6 +27,7 @@ class CmdHome(Command):
     key = "home"
     locks = "cmd:perm(Builder)"
     arg_regex = r"$"
+    help_category = "Building Commands"
 
     def func(self):
         """Impelement the command"""

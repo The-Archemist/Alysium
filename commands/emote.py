@@ -7,7 +7,7 @@ from server.utils.utils import wrap
 
 class EmoteCmdSet(CmdSet):
     """
-    Implements the emote command set. Used for universal commands.
+    Implements the emote command set.
     """
 
     key = "EmoteCommands"
@@ -15,28 +15,29 @@ class EmoteCmdSet(CmdSet):
     def at_cmdset_creation(self):
         "Populates the cmdset"
 
-        # Account-specific commands
+        # Emote-specific commands
         self.add(CmdEmote())
         self.add(CmdOmote())
         self.add(CmdPmote())
 
+
 class CmdEmote(Command):
     """
     Command:
-      emote <text>
-      ;<text>
+      emote <text>               
+      ;<text>                     
 
     Usage:
-      The standard emote conveys an action made by your character.
+      Convey an action made by your character.
 
     Example: emote gathers you up into a hug.
     Appears: Hailey gathers you up into a hug.
     """
 
     key = "emote"
-    aliases = [";"]
     locks = "cmd:all()"
-    
+    help_category = "Social Commands"
+
     def func(self):
         """Implement emotes"""
         caller = self.caller
@@ -45,7 +46,7 @@ class CmdEmote(Command):
         if not emote:
             caller.msg("Emote what?")
             return
-
+                
         if not caller.account.is_superuser:
             emote = strip_ansi(emote)
         
@@ -77,6 +78,7 @@ class CmdOmote(Command):
       
     key = "omote"
     locks = "cmd:all()"
+    help_category = "Communication"
 
     def func(self):
         """Implement omotes"""
@@ -93,7 +95,7 @@ class CmdOmote(Command):
         if not caller.name in omote:
             if ";" in omote:
                 omote = omote.replace(';', caller.name, 1)
-            else:
+            elif not caller.account.is_superuser:
                 caller.msg("Syntax: omote <text> with ; representing your character.")
                 return
 
@@ -103,7 +105,8 @@ class CmdOmote(Command):
         omote = f"->{omote}"
         omote = wrap(omote)
         caller.location.msg_contents(omote)
-            
+
+
 class CmdPmote(Command):
     """
     Command:
@@ -126,6 +129,7 @@ class CmdPmote(Command):
 
     key = "pmote"
     locks = "cmd:all()"
+    help_category = "Communication"
 
     def func(self):
         """Implement pmotes"""
@@ -146,4 +150,4 @@ class CmdPmote(Command):
         pmote = wrap(pmote)
         caller.location.msg_contents(pmote)
 
-        
+

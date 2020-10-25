@@ -291,7 +291,7 @@ class CmdLook(Command):
     key = "look"
     aliases = ["l"]
     locks = "cmd:all()"
-    help_category = "Character Commands"
+    #help_category = "Character Commands"
     
     def func(self):
         """Implement look command"""
@@ -338,6 +338,7 @@ class CmdSay(Command):
     key = "say"
     aliases = ["'", "lsay", '"', "qsay"]
     locks = "cmd:all()"
+    help_category = "Communication"
 
     def parse(self):
         self.args = self.args.strip()
@@ -399,6 +400,7 @@ class CmdWhisper(Command):
 
     key = "whisper"
     locks = "cmd:all()"
+    help_category = "Communication"
 
     def parse(self):
         self.args = self.args.strip()

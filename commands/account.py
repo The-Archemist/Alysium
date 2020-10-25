@@ -4,6 +4,7 @@ from django.conf import settings
 from evennia import CmdSet
 from evennia.server.sessionhandler import SESSIONS
 from evennia.utils.utils import dedent, fill
+from server.utils.utils import wrap
 
 class AccountCmdSet(CmdSet):
     """
@@ -81,7 +82,8 @@ class CmdHelp(default_help):
             string += "\n" + _SEP + "\n|C"+help_entries.center(_DEFAULT_WIDTH, " ")+"|n\n" + _SEP
             for category in sorted(hdict_cmds.keys()):
                 string += "\n |C%s|n:\n" % (str(category).title())
-                string += "|n " + fill("|n, |n".join(sorted(hdict_cmds[category]))) + "|n\n"
+                string += "|n" + wrap("|n, ".join(sorted(hdict_cmds[category])), pre_text = " ") + "\n"
+                #string += "|n " + fill("|n, |n".join(sorted(hdict_cmds[category]))) + "|n\n"
         if hdict_db and any(hdict_db.values()):
             string += "\n\n" + _SEP + "\n\r  |COther help entries|n\n" + _SEP
             for category in sorted(hdict_db.keys()):
@@ -170,7 +172,7 @@ class CmdWho(Command):
 
     key = "who"
     locks = "cmd:all()"
-    help_category = "Character Commands"
+    help_category = "Account Commands"
     account_caller = True
 
     def func(self):
