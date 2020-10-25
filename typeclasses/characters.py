@@ -10,7 +10,7 @@ creation commands.
 import re
 from evennia import DefaultCharacter
 from evennia.utils.ansi import strip_ansi
-from server.utils.utils import wrap
+from server.utils.utils import grammarize, wrap
 
 
 class Character(DefaultCharacter):
@@ -63,189 +63,50 @@ class Character(DefaultCharacter):
                 self.db.prelogout_location = self.location
                 self.location = None
 
-    def at_say(self, speech, volume="say", target=None):
-        #Capitalize the speech and strip final space
-
-        #Ensure speech ends appropriately.
-        if not speech.endswith((".", "!", "?", ".'", '."', "!'", '!"', "?'", '?"')):
-            speech = speech + "."
-
-        prefixes = {
-            #Target Prefixes - All
-            "all" : {
-                #Inflection Prefixes - Say
-                "say" : {     
-                    #Message Type       
-                    "self" : {
-                        #Volume Prefixes
-                        "normal" : f'You say, "',
-                        "loud"   : f'You loudly say, "',
-                        "quiet"  : f'You quietly say, "'
-                    },
-
-                    #Message Type 
-                    "room" : {
-                        #Volume Prefixes
-                        "normal" : f'{self} says, "',
-                        "loud"   : f'{self} loudly says, "',
-                        "quiet"  : f'{self} quietly says, "'
-                    }
-                },
-
-                #Inflection Prefixes - Say
-                "exclaim" : {
-                    #Message Type 
-                    "self" : {
-                        #Volume Prefixes
-                        "normal" : f'You exclaim, "',
-                        "loud"   : f'You loudly exclaim, "',
-                        "quiet"  : f'You quietly claim, "'
-                    },
-
-                    #Message Type 
-                    "room" : {
-                        #Volume Prefixes
-                        "normal" : f'{self} exclaims, "',
-                        "loud"   : f'{self} loudly exclaims, "',
-                        "quiet"  : f'{self} quietly exclaims, "'
-                    }
-                },
-                
-                #Inflection Prefixes - Say
-                "ask" : {
-                    #Message Type 
-                    "self" : {
-                        #Volume Prefixes
-                        "normal" : f'You ask, "',
-                        "loud"   : f'You loudly ask, "',
-                        "quiet"  : f'You quietly ask, "'
-                    },
-
-                    #Message Type 
-                    "room" : {
-                        #Volume Prefixes
-                        "normal" : f'{self} asks, "',
-                        "loud"   : f'{self} loudly asks, "',
-                        "quiet"  : f'{self} quietly asks, "'
-                    }
-                }
-            },
-
-            #Target Prefixes - Targeted
-            "target" : {
-                #Inflection Prefixes - Say
-                "say" : {      
-                    #Message Type       
-                    "self" : {
-                        #Volume Prefixes
-                        "normal" : f'You say to {target}, "',
-                        "loud"   : f'You loudly says to {target}, "',
-                        "quiet"  : f'You quietly says to {target}, "'
-                    },
-                    
-                    #Message Type 
-                    "room" : {
-                        #Volume Prefixes
-                        "normal" : f'{self} says to {target}, "',
-                        "loud"   : f'{self} loudly says to {target}, "',
-                        "quiet"  : f'{self} quietly says to {target}, "'
-                    },
-
-                    #Message Type 
-                    "target" : {
-                        #Volume Prefixes
-                        "normal" : f'{self} says to you, "',
-                        "loud"   : f'{self} loudly says to you, "',
-                        "quiet"  : f'{self} quietly says to you, "'
-                    }
-                },
-
-                #Inflection Prefixes - Exclaim
-                "exclaim" : {
-                    #Message Type 
-                    "self" : {
-                        #Volume Prefixes
-                        "normal" : f'You exclaim to {target}, "',
-                        "loud"   : f'You loudly exclaim to {target}, "',
-                        "quiet"  : f'You quietly claim to {target}, "'
-                    },
-
-                    #Message Type 
-                    "room" : {
-                        #Volume Prefixes
-                        "normal" : f'{self} exclaims to {target}, "',
-                        "loud"   : f'{self} loudly exclaims to {target}, "',
-                        "quiet"  : f'{self} quietly exclaims to {target}, "'
-                    },
-
-                    #Message Type 
-                    "target" : {
-                        #Volume Prefixes
-                        "normal" : f'{self} exclaims to you, "',
-                        "loud"   : f'{self} loudly exclaims to you, "',
-                        "quiet"  : f'{self} quietly exclaims to you, "'
-                    }
-                },
-
-                #Inflection Prefixes - Ask
-                "ask" : {
-                    #Message Type 
-                    "self" : {
-                        #Volume Prefixes
-                        "normal" : f'You ask {target}, "',
-                        "loud"   : f'You loudly ask {target}, "',
-                        "quiet"  : f'You quietly ask {target}, "'
-                    },
-
-                    #Message Type 
-                    "room" : {
-                        #Volume Prefixes
-                        "normal" : f'{self} asks {target}, "',
-                        "loud"   : f'{self} loudly asks {target}, "',
-                        "quiet"  : f'{self} quietly asks {target}, "'
-                    },
-
-                    #Message Type 
-                    "target" : {
-                        #Volume Prefixes
-                        "normal" : f'{self} asks you, "',
-                        "loud"   : f'{self} loudly asks you, "',
-                        "quiet"  : f'{self} quietly asks you, "'
-                    }
-                }               
-            }
-        }
-
-        if not target:
-            target_prefix = "all"
-        else:
-            target_prefix = "target"
-
-        if speech.endswith(("!", "!'", '!"')):
-            inflection_prefix = "exclaim"
-        elif speech.endswith(("?", "?'", '?"')):
-            inflection_prefix = "ask"
-        else:
-            inflection_prefix = "say"
+    def at_say(self, speech, volume, target=None):
+        speech = grammarize(speech)
 
         if volume in ("lsay", '"'):
-            volume_prefix = "loud"
+            volume = "loudly "
         elif volume == "qsay":
-            volume_prefix = "quiet"
+            volume = "quietly "
         else:
-            volume_prefix = "normal"
+            volume = ""
 
-        self_text = prefixes[target_prefix][inflection_prefix]["self"][volume_prefix]
-        room_text = prefixes[target_prefix][inflection_prefix]["room"][volume_prefix]
+        if speech.endswith("."):
+            self_inflection = "say"
+            room_inflection = "says"
+            if target:
+                self_inflection += f" to {target}"
+                room_inflection += f" to {target}"
+                target_inflection = f"says to you"
+        elif speech.endswith("!"):
+            self_inflection = "exclaim"
+            room_inflection = "exclaims"
+            if target:
+                self_inflection += f" to {target}"
+                room_inflection += f" to {target}"
+                target_inflection = f"exclaims to you"
+        elif speech.endswith("?"):
+            self_inflection = "ask"    
+            room_inflection = "asks"  
+            if target:
+                self_inflection += f" {target}"
+                room_inflection += f" {target}"
+                target_inflection = f"asks you"
 
-        self_speech = wrap(speech, pre_text = self_text) + '"'
-        room_speech = wrap(speech, pre_text = room_text) + '"'
-        self.msg(self_speech)
-        self.location.msg_contents(room_speech, exclude = (self, target))
+        self_msg = "You " + volume + self_inflection + ', "' 
+        self_msg = wrap(speech, pre_text=self_msg) + '"'
+        self.msg(self_msg)
+
+        room_msg = f"{self} " + volume + room_inflection + ', "' 
+        room_msg = wrap(speech, pre_text=room_msg) + '"'
+        self.location.msg_contents(room_msg, exclude=(self,target))
+
         if target:
-            target_text = prefixes[target_prefix][inflection_prefix]["target"][volume_prefix]
-            target_speech = wrap(speech, pre_text = target_text) + '"'
-            target.msg(target_speech)
-
+            target_msg = f"{self} " + volume + target_inflection + ', "'
+            target_msg = wrap(speech, pre_text=target_msg) + '"'
+            target.msg(target_msg)
 
     pass
+

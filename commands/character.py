@@ -498,10 +498,10 @@ class CmdSay(Command):
     def func(self):
         """Impelement say command"""
 
-        caller = self.caller
-        speech = self.speech
-        volume = self.volume
-        target = self.target
+        caller    = self.caller
+        speech    = self.speech
+        intensity = self.cmdstring
+        target    = self.target
         
         if not self.args:
             caller.msg("Say what?")
@@ -530,7 +530,8 @@ class CmdSay(Command):
             speech = speech[0:4] + speech[4].upper() + speech[5:]
 
         #Call at_after_say
-        caller.at_say(speech, volume, target)
+        caller.at_say(speech, intensity, target)
+        #caller.at_say(speech, msg_self=True)
 
 
 class CmdWhisper(Command):
