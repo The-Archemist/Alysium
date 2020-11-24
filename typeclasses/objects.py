@@ -11,6 +11,7 @@ inheritance.
 
 """
 from evennia import DefaultObject
+from server.utils.utils import wrap
 
 class Object(DefaultObject):
     """
@@ -156,6 +157,6 @@ class Object(DefaultObject):
      at_say(speaker, message)  - by default, called if an object inside this
                                  object speaks
 
-    """
+    """          
 
     

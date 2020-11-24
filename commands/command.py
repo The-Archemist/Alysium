@@ -5,6 +5,7 @@ Commands describe the input the account can do to the game.
 
 """
 
+import re
 from evennia import Command as BaseCommand
 
 # from evennia import default_cmds
@@ -32,6 +33,38 @@ class Command(BaseCommand):
     """
     def at_post_cmd(self):
         self.msg("> ")
+
+    pass
+
+class Social(Command):
+    """
+    Inherit from this class for pre-fabricated social emotes. These
+    should be contained in social.py.
+
+    Note that social also uses Command as a base class. The necessity
+    is for separate parsing.
+    """
+
+    def parse(self):
+        self.target = None
+        self.extra  = None
+        punctuation = ""
+
+        match = re.search(r"^\s*(\S+)(.*)$", self.args.strip())
+        if match is not None:
+            
+            #checking to see if extra is just punctuation
+            if match.group(1)[-1].isalpha():
+                self.target = self.caller.search(match.group(1))
+            else:
+                self.target = self.caller.search(match.group(1)[:-1])
+                punctuation = match.group(1)[-1]
+
+            if self.target:
+                #add punctuation back in as extra
+                self.extra = match.group(2).strip() + punctuation
+            else:
+                self.extra = (match.group(1) + match.group(2)).strip()
 
     pass
 

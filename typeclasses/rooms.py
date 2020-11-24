@@ -4,8 +4,9 @@ Room
 Rooms are simple containers that has no location of their own.
 
 """
-
+from collections import defaultdict
 from evennia import DefaultRoom
+from server.utils.utils import wrap
 
 
 class Room(DefaultRoom):

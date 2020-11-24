@@ -59,7 +59,7 @@ class Character(DefaultCharacter):
                 self.db.prelogout_location = self.location
                 self.location = None
 
-    def at_say(self, speech, volume, target=None):
+    def at_say(self, speech, volume="say", target=None):
         speech = grammarize(speech)
 
         #determine volume prefix
@@ -107,14 +107,49 @@ class Character(DefaultCharacter):
             target_msg = wrap(speech, pre_text=target_msg) + '"'
             target.msg(target_msg)
 
-    def at_social(self, self_msg, room_msg, target_msg=None, target=None):
+    def at_social(self, self_msg, room_msg, target_msg=None, target=None, extra=None, punctuation=None):
+        """
+        Social arguments:
+
+        self_msg    - message delivered to the caller.
+        room_msg    - message delivered to the room.
+        target_msg  - message delivered to the target if one exists.
+        target      - target if one exists
+        extra       - extra arguments added to augment social emote.
+        punctuation - default punctuation if not otherwise supplied.
+
+        """
+        if extra:
+            #see if there's multiple sentences
+            if extra.startswith((".", ",", "!", "?")):
+                self_msg = self_msg.strip()
+                room_msg = room_msg.strip()
+                target_msg = target_msg.strip()
+
+            self_msg += extra
+            room_msg += extra
+
+            if target:
+                target_msg += extra
+
+        #add self-specified punctuation to the end
+        if punctuation and (not extra or not extra.endswith((".", "!", "?"))):
+            self_msg += punctuation
+            room_msg += punctuation
+
+            if target:
+                target_msg += punctuation
+
+        #wrap it to default width & send to caller
         self_msg = wrap(grammarize(self_msg))
         self.msg(self_msg)
 
+        #wrap it to default width & send to the room, excluding caller and target
         room_msg = wrap(grammarize(room_msg))
         self.location.msg_contents(room_msg, exclude=(self,target))
 
-        if target:
+        #if there is a target and it isn't caller, wrap and send
+        if target and not target == self:
             target_msg = wrap(grammarize(target_msg))
             target.msg(target_msg)
 
