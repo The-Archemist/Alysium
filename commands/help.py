@@ -16,7 +16,7 @@ _DEFAULT_WIDTH = settings.CLIENT_DEFAULT_WIDTH
 _FORMAT_COLOR = "|540"
 _HEADER_COLOR = "|w"
 _SEP = "-"
-_SOCIAL_CMDSET = "commands.social.SocialCmdSet"
+_SOCIAL_COMMAND = "commands.command.Social"
 
 class CmdHelp(Command):
     """
@@ -100,7 +100,7 @@ class CmdHelp(Command):
         if query == "emotelist":
             emote_list = []
             for cmd in cmdset:
-                if inherits_from(cmd, "commands.command.Social"):
+                if inherits_from(cmd, _SOCIAL_COMMAND):
                     emote_list.append(cmd.key)            
             emote_list.sort()
 
