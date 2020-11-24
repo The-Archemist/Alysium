@@ -10,6 +10,9 @@ class SocialCmdSet(CmdSet):
 
     def at_cmdset_creation(self):
         "Populates the cmdset"
+        # Emotelist
+        self.add(CmdEmotelist())
+
         # Social-specific commands
         self.add(CmdAck())
         self.add(CmdAdmire())
@@ -162,6 +165,18 @@ class SocialCmdSet(CmdSet):
         self.add(CmdYawn())
 
 
+class CmdEmotelist(Command):
+    """
+    Placeholder for help entry.
+    """
+
+    key = "emotelist"
+    locks = "cmd:all()"
+    help_category = "Communication"
+
+    pass
+
+
 class CmdAck(Social):
     """
     Syntax: ack
@@ -177,6 +192,7 @@ class CmdAck(Social):
     key = "ack"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -213,6 +229,7 @@ class CmdAdmire(Social):
     key = "admire"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -255,6 +272,7 @@ class CmdApologize(Social):
     key = "apologize"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -291,6 +309,7 @@ class CmdApplaud(Social):
     key = "applaud"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -327,6 +346,7 @@ class CmdAgree(Social):
     key = "agree"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -362,6 +382,7 @@ class CmdBeam(Social):
     key = "beam"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -400,6 +421,7 @@ class CmdBeg(Social):
     key = "beg"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -435,6 +457,7 @@ class CmdBite(Social):
     key = "bite"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -470,6 +493,7 @@ class CmdBlink(Social):
     key = "blink"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -505,6 +529,7 @@ class CmdBlush(Social):
     key = "blush"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -543,6 +568,7 @@ class CmdBoggle(Social):
     key = "boggle"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -581,6 +607,7 @@ class CmdBounce(Social):
     key = "bounce"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -620,6 +647,7 @@ class CmdBow(Social):
     key = "bow"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -648,6 +676,7 @@ class CmdBrb(Social):
     key = "brb"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -671,6 +700,7 @@ class CmdBurp(Social):
     key = "burp"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -707,6 +737,7 @@ class CmdCackle(Social):
     key = "cackle"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -745,6 +776,7 @@ class CmdCaress(Social):
     key = "caress"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -785,6 +817,7 @@ class CmdCheer(Social):
     key = "cheer"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -827,6 +860,7 @@ class CmdChortle(Social):
     key = "chortle"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -867,6 +901,7 @@ class CmdChuckle(Social):
     key = "chuckle"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -902,6 +937,7 @@ class CmdClap(Social):
     key = "clap"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -939,6 +975,7 @@ class CmdComfort(Social):
     key = "comfort"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -981,6 +1018,7 @@ class CmdCough(Social):
     key = "cough"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1016,6 +1054,7 @@ class CmdCower(Social):
     key = "cower"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1053,6 +1092,7 @@ class CmdCringe(Social):
     key = "cringe"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1088,6 +1128,7 @@ class CmdCross(Social):
     key = "cross"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1123,6 +1164,7 @@ class CmdCry(Social):
     key = "cry"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1155,6 +1197,7 @@ class CmdCurtsy(Social):
     key = "curtsy"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1189,6 +1232,7 @@ class CmdDance(Social):
     key = "dance"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1226,6 +1270,7 @@ class CmdDrool(Social):
     key = "drool"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1261,6 +1306,7 @@ class CmdEek(Social):
     key = "eek"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1293,6 +1339,7 @@ class CmdEep(Social):
     key = "eep"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1325,6 +1372,7 @@ class CmdEye(Social):
     key = "eye"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1365,6 +1413,7 @@ class CmdFacepalm(Social):
     key = "facepalm"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1399,6 +1448,7 @@ class CmdFlex(Social):
     key = "flex"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1434,6 +1484,7 @@ class CmdFlop(Social):
     key = "flop"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1470,6 +1521,7 @@ class CmdFondle(Social):
     key = "fondle"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1505,6 +1557,7 @@ class CmdForgive(Social):
     key = "forgive"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1543,6 +1596,7 @@ class CmdFrench(Social):
     key = "french"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1575,6 +1629,7 @@ class CmdFrown(Social):
     key = "frown"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1607,6 +1662,7 @@ class CmdGasp(Social):
     key = "gasp"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1639,6 +1695,7 @@ class CmdGiggle(Social):
     key = "giggle"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1671,6 +1728,7 @@ class CmdGlare(Social):
     key = "glare"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1703,6 +1761,7 @@ class CmdGreet(Social):
     key = "greet"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1738,6 +1797,7 @@ class CmdGrin(Social):
     key = "grin"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1770,6 +1830,7 @@ class CmdGroan(Social):
     key = "groan"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1802,6 +1863,7 @@ class CmdGrope(Social):
     key = "grope"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1837,6 +1899,7 @@ class CmdGrovel(Social):
     key = "grovel"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1869,6 +1932,7 @@ class CmdGrowl(Social):
     key = "growl"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1901,6 +1965,7 @@ class CmdGrumble(Social):
     key = "grumble"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1936,6 +2001,7 @@ class CmdGrunt(Social):
     key = "grunt"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1965,6 +2031,7 @@ class CmdHang(Social):
     key = "hang"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -1989,6 +2056,7 @@ class CmdHiccup(Social):
     key = "hiccup"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2016,6 +2084,7 @@ class CmdHighfive(Social):
     key = "highfive"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2048,6 +2117,7 @@ class CmdHmm(Social):
     key = "hmm"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2074,6 +2144,7 @@ class CmdHmph(Social):
     key = "hmph"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2106,6 +2177,7 @@ class CmdHold(Social):
     key = "hold"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2141,6 +2213,7 @@ class CmdHop(Social):
     key = "hop"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2176,6 +2249,7 @@ class CmdHug(Social):
     key = "hug"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2211,6 +2285,7 @@ class CmdHum(Social):
     key = "hum"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2241,6 +2316,7 @@ class CmdKiss(Social):
     key = "kiss"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2278,6 +2354,7 @@ class CmdKneel(Social):
     key = "kneel"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2332,6 +2409,7 @@ class CmdLaugh(Social):
     aliases = ["lmao", "lol", "rofl"]
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2380,6 +2458,7 @@ class CmdLeer(Social):
     key = "leer"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2418,6 +2497,7 @@ class CmdMoan(Social):
     key = "moan"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2447,6 +2527,7 @@ class CmdMuse(Social):
     key = "muse"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2473,6 +2554,7 @@ class CmdMutter(Social):
     key = "mutter"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2508,6 +2590,7 @@ class CmdNibble(Social):
     key = "nibble"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2550,6 +2633,7 @@ class CmdNod(Social):
     key = "nod"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2582,6 +2666,7 @@ class CmdNudge(Social):
     key = "nudge"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2615,6 +2700,7 @@ class CmdNuzzle(Social):
     key = "nuzzle"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2656,6 +2742,7 @@ class CmdPace(Social):
     key = "pace"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2688,6 +2775,7 @@ class CmdPanic(Social):
     key = "panic"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2719,6 +2807,7 @@ class CmdPant(Social):
     key = "pant"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2749,6 +2838,7 @@ class CmdPat(Social):
     key = "pat"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2788,6 +2878,7 @@ class CmdPet(Social):
     key = "pet"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2826,6 +2917,7 @@ class CmdPeer(Social):
     key = "peer"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2866,6 +2958,7 @@ class CmdPinch(Social):
     key = "pinch"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2910,6 +3003,7 @@ class CmdPlead(Social):
     key = "plead"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2951,6 +3045,7 @@ class CmdPoint(Social):
     key = "point"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -2987,6 +3082,7 @@ class CmdPoke(Social):
     key = "poke"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3026,6 +3122,7 @@ class CmdPonder(Social):
     key = "ponder"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3072,6 +3169,7 @@ class CmdPounce(Social):
     key = "pounce"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3114,6 +3212,7 @@ class CmdPout(Social):
     key = "pout"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3150,6 +3249,7 @@ class CmdPuke(Social):
     aliases = ['vomit']
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3192,6 +3292,7 @@ class CmdPurr(Social):
     key = "purr"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3221,6 +3322,7 @@ class CmdQuiver(Social):
     key = "quiver"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3247,6 +3349,7 @@ class CmdRoll(Social):
     key = "roll"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3286,6 +3389,7 @@ class CmdRub(Social):
     key = "rub"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3334,6 +3438,7 @@ class CmdRuffle(Social):
     key = "ruffle"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3376,6 +3481,7 @@ class CmdScowl(Social):
     key = "scowl"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3408,6 +3514,7 @@ class CmdScratch(Social):
     key = "scratch"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3447,6 +3554,7 @@ class CmdScream(Social):
     key = "scream"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3479,6 +3587,7 @@ class CmdShake(Social):
     key = "shake"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3508,6 +3617,7 @@ class CmdShiver(Social):
     key = "shiver"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3534,6 +3644,7 @@ class CmdShrug(Social):
     key = "shrug"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3563,6 +3674,7 @@ class CmdShudder(Social):
     key = "shudder"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3586,6 +3698,7 @@ class CmdShuffle(Social):
     key = "shuffle"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3612,6 +3725,7 @@ class CmdSit(Social):
     key = "sit"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3651,6 +3765,7 @@ class CmdSlap(Social):
     aliases = ["bslap"]
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3692,6 +3807,7 @@ class CmdSmack(Social):
     key = "smack"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3731,6 +3847,7 @@ class CmdSmile(Social):
     key = "smile"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3763,6 +3880,7 @@ class CmdSmirk(Social):
     key = "smirk"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3793,6 +3911,7 @@ class CmdSmooch(Social):
     key = "smooch"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3833,6 +3952,7 @@ class CmdSnap(Social):
     key = "snap"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3865,6 +3985,7 @@ class CmdSneer(Social):
     key = "sneer"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3897,6 +4018,7 @@ class CmdSnicker(Social):
     key = "snicker"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3929,6 +4051,7 @@ class CmdSniff(Social):
     key = "sniff"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3961,6 +4084,7 @@ class CmdSniffle(Social):
     key = "sniffle"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -3993,6 +4117,7 @@ class CmdSnore(Social):
     key = "snore"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4026,6 +4151,7 @@ class CmdSnort(Social):
     key = "snort"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4056,6 +4182,7 @@ class CmdSnuggle(Social):
     key = "snuggle"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4096,6 +4223,7 @@ class CmdSob(Social):
     key = "sob"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4128,6 +4256,7 @@ class CmdSpank(Social):
     key = "spank"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4163,6 +4292,7 @@ class CmdSpit(Social):
     key = "spit"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4195,6 +4325,7 @@ class CmdSqueeze(Social):
     key = "squeeze"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4242,6 +4373,7 @@ class CmdStagger(Social):
     key = "stagger"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4274,6 +4406,7 @@ class CmdStamp(Social):
     key = "stamp"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4306,6 +4439,7 @@ class CmdStand(Social):
     key = "stand"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4338,6 +4472,7 @@ class CmdStare(Social):
     key = "stare"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4374,6 +4509,7 @@ class CmdStifle(Social):
     key = "stifle"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4400,6 +4536,7 @@ class CmdStroke(Social):
     key = "stroke"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4439,6 +4576,7 @@ class CmdStomp(Social):
     key = "stomp"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4475,6 +4613,7 @@ class CmdStretch(Social):
     key = "stretch"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4502,6 +4641,7 @@ class CmdStrut(Social):
     key = "strut"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4532,6 +4672,7 @@ class CmdStumble(Social):
     key = "stumble"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4565,6 +4706,7 @@ class CmdSulk(Social):
     key = "sulk"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4600,6 +4742,7 @@ class CmdTackle(Social):
     key = "tackle"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4636,6 +4779,7 @@ class CmdTap(Social):
     key = "tap"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4678,6 +4822,7 @@ class CmdTease(Social):
     key = "tease"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4717,6 +4862,7 @@ class CmdThank(Social):
     key = "thank"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4756,6 +4902,7 @@ class CmdThink(Social):
     key = "think"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4792,6 +4939,7 @@ class CmdTickle(Social):
     key = "tickle"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4835,6 +4983,7 @@ class CmdTongue(Social):
     key = "tongue"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4864,6 +5013,7 @@ class CmdTremble(Social):
     key = "tremble"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4891,6 +5041,7 @@ class CmdTsk(Social):
     key = "tsk"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4924,6 +5075,7 @@ class CmdTwiddle(Social):
     key = "twiddle"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4950,6 +5102,7 @@ class CmdTwirl(Social):
     key = "twirl"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -4987,6 +5140,7 @@ class CmdTwitch(Social):
     key = "twitch"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -5019,6 +5173,7 @@ class CmdWait(Social):
     key = "wait"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -5051,6 +5206,7 @@ class CmdWaltz(Social):
     key = "waltz"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -5083,6 +5239,7 @@ class CmdWave(Social):
     key = "wave"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -5115,6 +5272,7 @@ class CmdWhimper(Social):
     key = "whimper"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -5147,6 +5305,7 @@ class CmdWiggle(Social):
     key = "wiggle"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -5179,6 +5338,7 @@ class CmdWince(Social):
     key = "wince"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -5211,6 +5371,7 @@ class CmdWipe(Social):
     key = "wipe"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -5254,6 +5415,7 @@ class CmdWonder(Social):
     key = "wonder"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -5286,6 +5448,7 @@ class CmdWorship(Social):
     key = "worship"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -5318,6 +5481,7 @@ class CmdWow(Social):
     key = "wow"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
@@ -5356,6 +5520,7 @@ class CmdYawn(Social):
     key = "yawn"
     locks = "cmd:all()"
     auto_help = False
+    help_category = "Socials"
 
     def func(self):
         caller = self.caller
