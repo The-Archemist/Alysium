@@ -1,5 +1,6 @@
 import datetime
 from commands.command import Command
+from commands.help import CmdHelp
 from django.conf import settings
 from evennia import CmdSet
 from evennia.server.sessionhandler import SESSIONS
@@ -17,94 +18,16 @@ class AccountCmdSet(CmdSet):
         "Populates the cmdset"
 
         # Account-specific commands
-        self.add(CmdHelp())
+        self.add(CmdHelp()) #Native to help.py
         self.add(CmdPassword())
         self.add(CmdQuit())
         self.add(CmdWho())
 
-from evennia.commands.default.help import CmdHelp as default_help
-class CmdHelp(default_help):
-    """
-    Command:
-      help <command/topic>
-
-    Usage:
-      This will search for help on commands and other game related topics.
-    """
-
-    key = "help"
-    locks = "cmd:all()"
-    help_category = "Account Commands"
-
-    def format_help_entry(self, title, help_text, aliases=None, suggested=None):
-        """
-        This visually formats the help entry.
-        This method can be overriden to customize the way a help
-        entry is displayed.
-        Args:
-            title (str): the title of the help entry.
-            help_text (str): the text of the help entry.
-            aliases (list of str or None): the list of aliases.
-            suggested (list of str or None): suggested reading.
-        Returns the formatted string, ready to be sent.
-        """
-        _DEFAULT_WIDTH = settings.CLIENT_DEFAULT_WIDTH
-        _SEP = "|C" + "-" * _DEFAULT_WIDTH + "|n"
-
-        string = _SEP
-        if title:
-            string += "\n"
-            string += "|CHelp for |w%s|n" % title
-        if aliases:
-            string += " |C(aliases: %s|C)|n" % ("|C,|n ".join("|w%s|n" % ali for ali in aliases))
-        if help_text:
-            string += "\n%s" % dedent(help_text.rstrip())
-        if suggested:
-            string += "\n\n|CSuggested:|n "
-            string += "%s" % fill("|C,|n ".join("|w%s|n" % sug for sug in suggested))
-        string.strip()
-        string += "\n" + _SEP + "\n"
-        return string + "> "
-
-    def format_help_list(self, hdict_cmds, hdict_db):
-        """
-        Output a category-ordered list. The input are the
-        pre-loaded help files for commands and database-helpfiles
-        respectively.  You can override this method to return a
-        custom display of the list of commands and topics.
-        """
-        _DEFAULT_WIDTH = settings.CLIENT_DEFAULT_WIDTH
-        _SEP = "|C" + "-" * _DEFAULT_WIDTH + "|n"
-        help_entries = "Help Entries"
-        
-        string = ""
-        if hdict_cmds and any(hdict_cmds.values()):
-            string += "\n" + _SEP + "\n|C"+help_entries.center(_DEFAULT_WIDTH, " ")+"|n\n" + _SEP
-            for category in sorted(hdict_cmds.keys()):
-                string += "\n |C%s|n:\n" % (str(category).title())
-                string += "|n" + wrap("|n, ".join(sorted(hdict_cmds[category])), pre_text = " ") + "\n"
-                #string += "|n " + fill("|n, |n".join(sorted(hdict_cmds[category]))) + "|n\n"
-        if hdict_db and any(hdict_db.values()):
-            string += "\n\n" + _SEP + "\n\r  |COther help entries|n\n" + _SEP
-            for category in sorted(hdict_db.keys()):
-                string += "\n\r  |w%s|n:\n" % (str(category).title())
-                string += (
-                    "|G"
-                    + fill(", ".join(sorted([str(topic) for topic in hdict_db[category]])))
-                    + "|n"
-                )
-        return string + "\n> "
-
-    def func(self):
-        super().func()
-
 class CmdPassword(Command):
     """
-    Command:
-      password
+    Syntax: password
 
-    Usage:
-      Change your password.
+        Change your password.
     """
 
     key = "password"
@@ -142,11 +65,9 @@ class CmdPassword(Command):
 
 class CmdQuit(Command):
     """
-    Command:
-      quit
+    Syntax: quit
 
-    Usage:
-      Quit the game.
+        Quit the game.
     """
 
     key = "quit"
@@ -163,11 +84,9 @@ class CmdQuit(Command):
 
 class CmdWho(Command):
     """
-    Command:
-      who
+    Syntax: who
 
-    Usage:
-      Shows who is currently online and additional information.
+        Shows who is currently online and additional information.
     """
 
     key = "who"

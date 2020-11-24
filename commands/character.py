@@ -32,12 +32,10 @@ class CharacterCmdSet(CmdSet):
 
 class CmdDrop(Command):
     """
-    Command:
-      drop all                    Drop everything from your inventory.
-      drop <object>               Drop an item from your inventory.
+    Syntax: drop all      - Drop everything from your inventory.
+            drop <object> - Drop an item from your inventory.
 
-    Usage:
-      Drop objects from your inventory into the room.
+        Drop objects from your inventory into the room.
     """
 
     key = "drop"
@@ -98,15 +96,13 @@ class CmdDrop(Command):
 
 class CmdEmote(Command):
     """
-    Command:
-      emote <text>               
-      ;<text>                     
-
-    Usage:
-      Convey an action made by your character.
+    Syntax: emote <text>     
+    Aliases: ;<text>                     
 
     Example: emote gathers you up into a hug.
     Appears: Hailey gathers you up into a hug.
+
+        Convey an action made by your character.
     """
 
     key = "emote"
@@ -135,12 +131,10 @@ class CmdEmote(Command):
 
 class CmdGet(Command):
     """
-    Command:      
-      get all                Gets everything from the room.
-      get <object>           Gets an object from the room.
+    Syntax: get all      - Gets everything from the room.
+            get <object> - Gets an object from the room.
 
-    Usage:
-      Get objects from the room and move them into your inventory.
+        Get objects from the room and move them into your inventory.
     """
 
     key = "get"
@@ -205,11 +199,9 @@ class CmdGet(Command):
 
 class CmdGive(Command):
     """
-    Command:
-      give <object> to <target>
+    Syntax: give <object> to <target>
 
-    Usage:
-      Give objects from your inventory to others.
+        Give objects from your inventory to others.
     """
     
     key = "give"
@@ -278,13 +270,11 @@ class CmdGive(Command):
 
 class CmdInventory(Command):
     """
-    Command:
-      i
-      inv
-      inventory
+    Syntax:  i
+    Aliases: inv
+             inventory
 
-    Usage:
-      Shows your inventory.
+        Display your inventory.
     """
 
     key = "inventory"
@@ -322,12 +312,10 @@ class CmdInventory(Command):
 
 class CmdLook(Command):
     """
-    Command:
-      look
-      look <obj>
+    Syntax: look       - Look at your current surroundings
+            look <obj> - Look at a specific person or thing
 
-    Usage:
-      Observes your location or objects in your vicinity.
+        Observe your location or objects in the vicinity.
     """
 
     key = "look"
@@ -366,20 +354,19 @@ class CmdLook(Command):
 
 class CmdOmote(Command):
     """
-    Command:
-      omote <text> with ; representing your character
-
-    Usage:
-      The optional emote places your name somewhere within the written action.
-      A semi-colon or your name are required for an omote to function.
+    Syntax: omote <text> with ; representing your character
 
     Example: omote Without so much as a word, ; gathers you up into a hug.
     Appears: Without so much as a word, Hailey gathers you up into a hug.
 
-    Notes: Omotes are not possible in tells or channels. Use standard emotes
-           for these modes of communication.
+        The optional emote places your name somewhere within the written action.
+        A semi-colon or your name are required for an omote to function.
 
-           Using omote to power emote another character is against the rules.
+
+        Omotes are not possible in tells or channels. Use standard emotes
+        for these modes of communication.
+
+        Using omote to power emote another character is against the rules.
     """
       
     key = "omote"
@@ -415,21 +402,19 @@ class CmdOmote(Command):
 
 class CmdPmote(Command):
     """
-    Command:
-      pmote <text>
-
-    Usage:
-      The possessive emote attaches an apostrophy to your name to convey a
-      possessive form.
+    Syntax: pmote <text>
 
     Example: pmote hug squeezes so hard you might pop!
     Appears: Hailey's hug squeezes so hard you might pop!
-    
-    Notes: pmote will start the emote with your name in a possessive fashion.
-           To convey possession in the middle of an action, use omote.
 
-           Pmotes are not possible in tells or channels. Use standard emotes
-           for those modes of communication.
+        The possessive emote attaches an apostrophy to your name to convey a
+        possessive form.
+
+        pmote will start the emote with your name in a possessive fashion.
+        To convey possession in the middle of an action, use omote.
+
+        pmotes are not possible in tells or channels. Use standard emotes
+        for those modes of communication.
 
     """
 
@@ -459,17 +444,18 @@ class CmdPmote(Command):
 
 class CmdSay(Command):
     """
-    Command:
-      say  <message>              Speak in a normal voice.
-      lsay <message>              Speak in a loud voice.
-      qsay <message>              Speak in a quiet voice.
+    Syntax: say  <message> - Speak in a normal voice.
+            lsay <message> - Speak in a loud voice.
+            qsay <message> - Speak in a quiet voice.
 
-      say to <person> <message>   Speak to someone specifically.
-      lsay to <person> <message>  Speak to someone loudly.
-      qsay to <person> <message>  Speak to someone quietly.
+            say to <person> <message>  - Speak to someone.
+            lsay to <person> <message> - Speak to someone loudly.
+            qsay to <person> <message> - Speak to someone quietly.
 
-    Usage:
-      Talk to those in your current location.
+    Aliases: ' - Normal voice
+             " - Loud voice
+
+        Talk to those around you.
     """
 
     key = "say"
@@ -535,12 +521,10 @@ class CmdSay(Command):
 
 class CmdWhisper(Command):
     """
-    Command:
-      whisper <target> <message>
-      whisper to <target> <message>
+    Syntax: whisper <target> <message>
+            whisper to <target> <message>
 
-    Usage:
-      Talk privately to someone in your current location.
+        Whisper privately to someone.
     """
 
     key = "whisper"

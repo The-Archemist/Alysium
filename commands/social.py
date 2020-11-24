@@ -10,7 +10,6 @@ class SocialCmdSet(CmdSet):
 
     def at_cmdset_creation(self):
         "Populates the cmdset"
-
         # Social-specific commands
         self.add(CmdAck())
         self.add(CmdAdmire())
@@ -150,7 +149,6 @@ class SocialCmdSet(CmdSet):
         self.add(CmdTwiddle())
         self.add(CmdTwirl())
         self.add(CmdTwitch())
-
         self.add(CmdWait())
         self.add(CmdWaltz())
         self.add(CmdWave())
@@ -166,8 +164,7 @@ class SocialCmdSet(CmdSet):
 
 class CmdAck(Social):
     """
-    Command:
-      ack
+    Syntax: ack
 
     Examples: You ack.
               You ack at Hailey.
@@ -203,8 +200,7 @@ class CmdAck(Social):
       
 class CmdAdmire(Social):
     """
-    Command:
-      admire
+    Syntax: admire
 
     Examples: You stare off in admiration.
               You admire Hailey.
@@ -246,8 +242,7 @@ class CmdAdmire(Social):
 
 class CmdApologize(Social):
     """
-    Command:
-      apologize
+    Syntax: apologize
 
     Examples: You apologize.
               You apologize to Hailey.
@@ -283,8 +278,7 @@ class CmdApologize(Social):
 
 class CmdApplaud(Social):
     """
-    Command:
-      applaud
+    Syntax:applaud
 
     Examples: You applaud.
               You applaud Hailey.
@@ -320,8 +314,7 @@ class CmdApplaud(Social):
 
 class CmdAgree(Social):
     """
-    Command:
-      agree
+    Syntax: agree
 
     Examples: You agree.
               You agree with Hailey.
@@ -357,8 +350,7 @@ class CmdAgree(Social):
 
 class CmdBeam(Social):
     """
-    Command:
-      beam
+    Syntax: beam
 
     Examples: You beam brightly.
               You beam at Hailey.
@@ -396,8 +388,7 @@ class CmdBeam(Social):
 
 class CmdBeg(Social):
     """
-    Command:
-      beg
+    Syntax: beg
 
     Examples: You beg.
               You beg Hailey.
@@ -432,8 +423,7 @@ class CmdBeg(Social):
 
 class CmdBite(Social):
     """
-    Command:
-      bite
+    Syntax: bite
 
     Examples: You bite yourself.
               You bite Hailey.
@@ -468,8 +458,7 @@ class CmdBite(Social):
 
 class CmdBlink(Social):
     """
-    Command:
-      blink
+    Syntax: blink
 
     Examples: You blink.
               You blink at Hailey.
@@ -504,8 +493,7 @@ class CmdBlink(Social):
 
 class CmdBlush(Social):
     """
-    Command:
-      blush
+    Syntax: blush
 
     Examples: You blush a shade of pink.
               You blush at Hailey.
@@ -543,8 +531,7 @@ class CmdBlush(Social):
 
 class CmdBoggle(Social):
     """
-    Command:
-      boggle
+    Syntax: boggle
 
     Examples: You boggle at the concept.
               You boggle at Hailey.
@@ -582,8 +569,7 @@ class CmdBoggle(Social):
 
 class CmdBounce(Social):
     """
-    Command:
-      bounce
+    Syntax: bounce
 
     Examples: You bounce around!
               You bounce around Hailey!
@@ -621,8 +607,7 @@ class CmdBounce(Social):
 
 class CmdBow(Social):
     """
-    Command:
-      bow
+    Syntax: bow
 
     Examples: You bow.
               You bows to Hailey.
@@ -654,8 +639,7 @@ class CmdBow(Social):
    
 class CmdBrb(Social):
     """
-    Command:
-      brb
+    Syntax: brb
 
     Examples: You say, "I'll be right back."
               Hailey says, "I'll be right back."
@@ -675,8 +659,7 @@ class CmdBrb(Social):
 
 class CmdBurp(Social):
     """
-    Command:
-      burp
+    Syntax: burp
 
     Examples: You burp.
               You burp at Hailey.
@@ -711,8 +694,7 @@ class CmdBurp(Social):
 
 class CmdCackle(Social):
     """
-    Command:
-      cackle
+    Syntax: cackle
 
     Examples: You cackle with glee!
               You cackle at Hailey!
@@ -751,8 +733,7 @@ class CmdCackle(Social):
   
 class CmdCaress(Social):
     """
-    Command:
-      caress
+    Syntax: caress
 
     Examples: You caress yourself lovingly.
               You caress Hailey lovingly.
@@ -791,8 +772,7 @@ class CmdCaress(Social):
 
 class CmdCheer(Social):
     """
-    Command:
-      cheer
+    Syntax: cheer
 
     Examples: You cheer enthusiastically!
               You cheers for Hailey!
@@ -834,8 +814,7 @@ class CmdCheer(Social):
 
 class CmdChortle(Social):
     """
-    Command:
-      chortle
+    Syntax: chortle
 
     Examples: You chortle gleefully!
               You chortles at Hailey!
@@ -875,8 +854,7 @@ class CmdChortle(Social):
 
 class CmdChuckle(Social):
     """
-    Command:
-      chuckle
+    Syntax: chuckle
 
     Examples: You chuckle.
               You chuckle at Hailey.
@@ -911,8 +889,7 @@ class CmdChuckle(Social):
 
 class CmdClap(Social):
     """
-    Command:
-      clap
+    Syntax: clap
 
     Examples: You clap.
               You clap for Hailey.
@@ -947,8 +924,7 @@ class CmdClap(Social):
 
 class CmdComfort(Social):
     """
-    Command:
-      comfort
+    Syntax: comfort
 
     Examples: You comfort everyone.
               You seek comfort.
@@ -990,8 +966,7 @@ class CmdComfort(Social):
 
 class CmdCough(Social):
     """
-    Command:
-      cough
+    Syntax: cough
 
     Examples: You cough.
               You cough on yourself.
@@ -1028,8 +1003,7 @@ class CmdCough(Social):
 
 class CmdCower(Social):
     """
-    Command:
-      cower
+    Syntax: cower
 
     Examples: You cower in terror.
               You cowers away from Hailey.
@@ -1064,8 +1038,7 @@ class CmdCower(Social):
 
 class CmdCringe(Social):
     """
-    Command:
-      cringe
+    Syntax: cringe
 
     Examples: You cringe.
               You cringe at yourself.
@@ -1102,8 +1075,7 @@ class CmdCringe(Social):
 
 class CmdCross(Social):
     """
-    Command:
-      cross
+    Syntax: cross
 
     Examples: You cross your arms.
               You cross your arms at Hailey.
@@ -1138,8 +1110,7 @@ class CmdCross(Social):
 
 class CmdCry(Social):
     """
-    Command:
-      cry
+    Syntax: cry
 
     Examples: You cry.
               You cry on Hailey's shoulder.
@@ -1171,8 +1142,7 @@ class CmdCry(Social):
 
 class CmdCurtsy(Social):
     """
-    Command:
-      curtsy
+    Syntax: curtsy
 
     Examples: You curtsy.
               You curtsy to Hailey.
@@ -1204,8 +1174,7 @@ class CmdCurtsy(Social):
 
 class CmdDance(Social):
     """
-    Command:
-      dance
+    Syntax: dance
 
     Examples: You dance.
               You dance by yourself.
@@ -1242,8 +1211,7 @@ class CmdDance(Social):
 
 class CmdDrool(Social):
     """
-    Command:
-      drool
+    Syntax: drool
 
     Examples: You drool.
               You drool on yourself.
@@ -1280,8 +1248,7 @@ class CmdDrool(Social):
 
 class CmdEek(Social):
     """
-    Command:
-      eek
+    Syntax: eek
 
     Examples: You eek!
               You eeks at Hailey!
@@ -1313,8 +1280,7 @@ class CmdEek(Social):
 
 class CmdEep(Social):
     """
-    Command:
-      eep
+    Syntax: eep
 
     Examples: You eep!
               You eeps at Hailey!
@@ -1346,8 +1312,7 @@ class CmdEep(Social):
 
 class CmdEye(Social):
     """
-    Command:
-      eye
+    Syntax: eye
 
     Examples: You eye everyone.
               You eye Hailey.
@@ -1383,15 +1348,18 @@ class CmdEye(Social):
 
 class CmdFacepalm(Social):
     """
-    Command:
-      facepalm
+    Syntax: facepalm
 
     Examples: You place your face into your hands and let out a long sigh.
-              You look at Hailey then place your face in your hands and let out a long sigh.
+              You look at Hailey then place your face in your hands and let 
+              out a long sigh.
 
-              Hailey places their face into their hands and lets out a long sigh.
-              Hailey looks at Saul then places their face into their hands and lets out a long sigh.
-              Hailey looks at you then places their face into their hands and lets out a long sigh.
+              Hailey places their face into their hands and lets out a long 
+              sigh.
+              Hailey looks at Saul then places their face into their hands and
+              lets out a long sigh.
+              Hailey looks at you then places their face into their hands and 
+              lets out a long sigh.
     """
 
     key = "facepalm"
@@ -1416,8 +1384,7 @@ class CmdFacepalm(Social):
 
 class CmdFlex(Social):
     """
-    Command:
-      flex
+    Syntax: flex
 
     Examples: You flex.
               You flex in a mirror.
@@ -1454,8 +1421,7 @@ class CmdFlex(Social):
 
 class CmdFlop(Social):
     """
-    Command:
-      flop
+    Syntax: flop
 
     Examples: You flop on the ground.
               You flop on Hailey.
@@ -1491,8 +1457,7 @@ class CmdFlop(Social):
 
 class CmdFondle(Social):
     """
-    Command:
-      fondle
+    Syntax: fondle
 
     Examples: You fondle yourself.
               You fondle Hailey.
@@ -1527,8 +1492,7 @@ class CmdFondle(Social):
 
 class CmdForgive(Social):
     """
-    Command:
-      forgive
+    Syntax: forgive
 
     Examples: You forgive yourself.
               You forgive Hailey.
@@ -1563,15 +1527,17 @@ class CmdForgive(Social):
 
 class CmdFrench(Social):
     """
-    Command:
-      french
+    Syntax: french
 
     Examples: You desperately search for someone to french kiss.
-              You give Hailey a deep and passionate kiss; it seems to last forever.
+              You give Hailey a deep and passionate kiss; it seems to last 
+              forever.
 
               Hailey desperately searches for someone to french kiss.
-              Hailey gives Saul a deep and passionate kiss; it seems to last forever.
-              Hailey gives you a deep and passionate kiss; it seems to last forever.
+              Hailey gives Saul a deep and passionate kiss; it seems to last 
+              forever.
+              Hailey gives you a deep and passionate kiss; it seems to last 
+              forever.
     """
 
     key = "french"
@@ -1596,8 +1562,7 @@ class CmdFrench(Social):
 
 class CmdFrown(Social):
     """
-    Command:
-      frown
+    Syntax: frown
 
     Examples: You frown.
               You frown at Hailey.
@@ -1629,8 +1594,7 @@ class CmdFrown(Social):
 
 class CmdGasp(Social):
     """
-    Command:
-      gasp
+    Syntax: gasp
 
     Examples: You gasp.
               You gasp at Hailey.
@@ -1662,8 +1626,7 @@ class CmdGasp(Social):
 
 class CmdGiggle(Social):
     """
-    Command:
-      giggle
+    Syntax: giggle
 
     Examples: You giggle.
               You giggle at Hailey.
@@ -1695,8 +1658,7 @@ class CmdGiggle(Social):
 
 class CmdGlare(Social):
     """
-    Command:
-      glare
+    Syntax: glare
 
     Examples: You glare.
               You glare at Hailey.
@@ -1728,8 +1690,7 @@ class CmdGlare(Social):
 
 class CmdGreet(Social):
     """
-    Command:
-      greet
+    Syntax: greet
 
     Examples: You greet everyone.
               You greet Hailey.
@@ -1764,8 +1725,7 @@ class CmdGreet(Social):
 
 class CmdGrin(Social):
     """
-    Command:
-      grin
+    Syntax: grin
 
     Examples: You grin.
               You grin at Hailey.
@@ -1797,8 +1757,7 @@ class CmdGrin(Social):
 
 class CmdGroan(Social):
     """
-    Command:
-      groan
+    Syntax: groan
 
     Examples: You groan.
               You groan at Hailey.
@@ -1830,8 +1789,7 @@ class CmdGroan(Social):
 
 class CmdGrope(Social):
     """
-    Command:
-      grope
+    Syntax: grope
 
     Examples: You grope at the air.
               You grope Hailey.
@@ -1866,8 +1824,7 @@ class CmdGrope(Social):
 
 class CmdGrovel(Social):
     """
-    Command:
-      grovel
+    Syntax: grovel
 
     Examples: You grovel.
               You grovel before Hailey.
@@ -1899,8 +1856,7 @@ class CmdGrovel(Social):
 
 class CmdGrowl(Social):
     """
-    Command:
-      growl
+    Syntax: growl
 
     Examples: You growl.
               You growls at Hailey.
@@ -1932,8 +1888,7 @@ class CmdGrowl(Social):
 
 class CmdGrumble(Social):
     """
-    Command:
-      grumble
+    Syntax: grumble
 
     Examples: You grumble.
               You grumbles at Hailey.
@@ -1968,8 +1923,7 @@ class CmdGrumble(Social):
 
 class CmdGrunt(Social):
     """
-    Command:
-      grunt
+    Syntax: grunt
 
     Examples: You grunt.
               You grunts at Hailey.
@@ -2001,8 +1955,7 @@ class CmdGrunt(Social):
 
 class CmdHang(Social):
     """
-    Command:
-      hang
+    Syntax: hang
 
     Examples: You hang your head in shame.
 
@@ -2026,8 +1979,7 @@ class CmdHang(Social):
 
 class CmdHiccup(Social):
     """
-    Command:
-      hiccup
+    Syntax: hiccup
 
     Examples: You hiccup.
 
@@ -2051,8 +2003,7 @@ class CmdHiccup(Social):
 
 class CmdHighfive(Social):
     """
-    Command:
-      highfive
+    Syntax: highfive
 
     Examples: You highfive yourself.
               You highfive Hailey.
@@ -2087,8 +2038,7 @@ class CmdHighfive(Social):
 
 class CmdHmm(Social):
     """
-    Command:
-      hmm
+    Syntax: hmm
 
     Examples: You hmm.
 
@@ -2111,8 +2061,7 @@ class CmdHmm(Social):
 
 class CmdHmph(Social):
     """
-    Command:
-      hmph
+    Syntax: hmph
 
     Examples: You hmph.
               You hmph at Hailey.
@@ -2144,8 +2093,7 @@ class CmdHmph(Social):
 
 class CmdHold(Social):
     """
-    Command:
-      hold
+    Syntax: hold
 
     Examples: You hold yourself.
               You hold Hailey.
@@ -2180,8 +2128,7 @@ class CmdHold(Social):
 
 class CmdHop(Social):
     """
-    Command:
-      hop
+    Syntax: hop
 
     Examples: You hop up and down!
               You hop around Hailey!
@@ -2216,8 +2163,7 @@ class CmdHop(Social):
 
 class CmdHug(Social):
     """
-    Command:
-      hug
+    Syntax: hug
 
     Examples: You hug yourself.
               You hug Hailey.
@@ -2252,8 +2198,7 @@ class CmdHug(Social):
 
 class CmdHum(Social):
     """
-    Command:
-      hum
+    Syntax: hum
 
     Examples: You hum.
               You hum to Hailey.
@@ -2285,8 +2230,7 @@ class CmdHum(Social):
 
 class CmdKiss(Social):
     """
-    Command:
-      kiss
+    Syntax: kiss
 
     Examples: You kiss Hailey.
 
@@ -2321,8 +2265,7 @@ class CmdKiss(Social):
 
 class CmdKneel(Social):
     """
-    Command:
-      kneel
+    Syntax: kneel
 
     Examples: You kneel down.
               You kneel before Hailey.
@@ -2357,29 +2300,31 @@ class CmdKneel(Social):
 
 class CmdLaugh(Social):
     """
-    Command:
-      laugh
-      lmao
-      lol
-      rofl
+    Syntax:  laugh
+    Aliases: lmao
+             lol
+             rofl
       
 
-    Examples: You laugh.
-              You laugh your ass off!
-              You laugh out loud.
-              You roll on the floor, laughing!
+    Examples: 
+      Laugh:  You laugh.
               You laugh at Hailey.
-              You laugh your ass off at Hailey!
-              You laugh out loud at Hailey.
-              You roll on the floor, laughing at Hailey!
-
               Hailey laughs.
-              Hailey laughs their ass off!
-              Hailey laughs out loud.
-              Hailey rolls on the floor, laughing!
               Hailey laughs at Saul.
+
+      Lmao:   You laugh your ass off!
+              You laugh your ass off at Hailey!
+              Hailey laughs their ass off!
               Hailey laughs their ass off at Saul!
+
+      Lol:    You laugh out loud.
+              You laugh out loud at Hailey.
+              Hailey laughs out loud.
               Hailey laughs out loud at Saul.
+
+      Rofl:   You roll on the floor, laughing!
+              You roll on the floor, laughing at Hailey!
+              Hailey rolls on the floor, laughing!
               Hailey rolls on the floor, laughing at Saul!
     """
 
@@ -2422,8 +2367,7 @@ class CmdLaugh(Social):
 
 class CmdLeer(Social):
     """
-    Command:
-      leer
+    Syntax: leer
 
     Examples: You leer at everyone.
               You leer at Hailey.
@@ -2461,8 +2405,7 @@ class CmdLeer(Social):
 
 class CmdMoan(Social):
     """
-    Command:
-      moan
+    Syntax: moan
 
     Examples: You moan.
               You moan at Hailey.
@@ -2494,8 +2437,7 @@ class CmdMoan(Social):
 
 class CmdMuse(Social):
     """
-    Command:
-      muse
+    Syntax: muse
 
     Examples: You muse in thought.
 
@@ -2518,8 +2460,7 @@ class CmdMuse(Social):
 
 class CmdMutter(Social):
     """
-    Command:
-      mutter
+    Syntax: mutter
 
     Examples: You mutter under your breath.
               You mutter bitter things about Hailey.
@@ -2554,8 +2495,7 @@ class CmdMutter(Social):
 
 class CmdNibble(Social):
     """
-    Command:
-      nibble
+    Syntax: nibble
 
     Examples: You nibble on your lower lip.
               You nibble on Hailey's ear.
@@ -2597,8 +2537,7 @@ class CmdNibble(Social):
 
 class CmdNod(Social):
     """
-    Command:
-      nod
+    Syntax: nod
 
     Examples: You nod.
               You nod at Hailey.
@@ -2630,8 +2569,7 @@ class CmdNod(Social):
 
 class CmdNudge(Social):
     """
-    Command:
-      nudge
+    Syntax: nudge
 
     Examples: You nudge everyone.
               You nudge Hailey.
@@ -2666,8 +2604,7 @@ class CmdNudge(Social):
 
 class CmdNuzzle(Social):
     """
-    Command:
-      nuzzle
+    Syntax: nuzzle
 
     Examples: You nuzzle Hailey affectionately.
 
@@ -2706,8 +2643,7 @@ class CmdNuzzle(Social):
 
 class CmdPace(Social):
     """
-    Command:
-      pace
+    Syntax: pace
 
     Examples: You pace.
               You pace around Hailey.
@@ -2739,8 +2675,7 @@ class CmdPace(Social):
 
 class CmdPanic(Social):
     """
-    Command:
-      panic
+    Syntax: panic
 
     Examples: You panic.
               You panic about Hailey.
@@ -2772,8 +2707,7 @@ class CmdPanic(Social):
 
 class CmdPant(Social):
     """
-    Command:
-      pant
+    Syntax: pant
 
     Examples: You pant for breath.
               You pant heavily.
@@ -2804,8 +2738,7 @@ class CmdPant(Social):
 
 class CmdPat(Social):
     """
-    Command:
-      pat
+    Syntax: pat
 
     Examples: You pat Hailey.
 
@@ -2844,8 +2777,7 @@ class CmdPat(Social):
 
 class CmdPet(Social):
     """
-    Command:
-      pet
+    Syntax: pet
 
     Examples: You pet Hailey.
 
@@ -2881,8 +2813,7 @@ class CmdPet(Social):
 
 class CmdPeer(Social):
     """
-    Command:
-      peer
+    Syntax: peer
 
     Examples: You peer at everyone.
               You peer at Hailey.
@@ -2922,8 +2853,7 @@ class CmdPeer(Social):
 
 class CmdPinch(Social):
     """
-    Command:
-      pinch
+    Syntax: pinch
 
     Examples: You pinch yourself.
               You pinch Hailey.
@@ -2967,8 +2897,7 @@ class CmdPinch(Social):
 
 class CmdPlead(Social):
     """
-    Command:
-      plead
+    Syntax: plead
 
     Examples: You plead for your life.
               You plead Hailey.
@@ -3009,8 +2938,7 @@ class CmdPlead(Social):
 
 class CmdPoint(Social):
     """
-    Command:
-      point
+    Syntax: point
 
     Examples: You point.
               You point at Hailey.
@@ -3046,8 +2974,7 @@ class CmdPoint(Social):
 
 class CmdPoke(Social):
     """
-    Command:
-      poke
+    Syntax: poke
 
     Examples: You poke everyone.
               You pokes Hailey.
@@ -3086,8 +3013,7 @@ class CmdPoke(Social):
 
 class CmdPonder(Social):
     """
-    Command:
-      ponder
+    Syntax: ponder
 
     Examples: You ponder.
               You ponder Hailey.
@@ -3133,8 +3059,7 @@ class CmdPonder(Social):
 
 class CmdPounce(Social):
     """
-    Command:
-      pounce
+    Syntax: pounce
 
     Examples: You ready to pounce!
               You pounce on Hailey!
@@ -3176,8 +3101,7 @@ class CmdPounce(Social):
 
 class CmdPout(Social):
     """
-    Command:
-      pout
+    Syntax: pout
 
     Examples: You pout.
               You pout at Hailey.
@@ -3209,15 +3133,17 @@ class CmdPout(Social):
 
 class CmdPuke(Social):
     """
-    Command:
-      puke
+    Syntax:  puke
+    Aliases: vomit
 
     Examples: You puke.
               You puke on Hailey.
-
               Hailey pukes.
               Hailey pukes on Saul.
               Hailey pukes on you.
+
+              You vomit into a lumpy puddle on the floor.
+              Hailey vomits into a lumpy puddle on the floor.
     """
 
     key = "puke"
@@ -3253,8 +3179,7 @@ class CmdPuke(Social):
 
 class CmdPurr(Social):
     """
-    Command:
-      purr
+    Syntax: purr
 
     Examples: You purr.
               You purr at Hailey.
@@ -3286,8 +3211,7 @@ class CmdPurr(Social):
 
 class CmdQuiver(Social):
     """
-    Command:
-      quiver
+    Syntax: quiver
 
     Examples: You quiver.
 
@@ -3310,8 +3234,7 @@ class CmdQuiver(Social):
 
 class CmdRoll(Social):
     """
-    Command:
-      roll
+    Syntax: roll
 
     Examples: You roll your eyes.
               You roll your eyes at Hailey.
@@ -3350,8 +3273,7 @@ class CmdRoll(Social):
 
 class CmdRub(Social):
     """
-    Command:
-      rub
+    Syntax: rub
 
     Examples: You rub yourself.
               You rub Hailey.
@@ -3399,8 +3321,7 @@ class CmdRub(Social):
 
 class CmdRuffle(Social):
     """
-    Command:
-      ruffle
+    Syntax: ruffle
 
     Examples: You ruffle your hair.
               You ruffle Hailey's hair.
@@ -3439,11 +3360,10 @@ class CmdRuffle(Social):
                 target_msg += "hair "
 
         caller.at_social(self_msg, room_msg, target_msg, target, extra)
-
+      
 class CmdScowl(Social):
     """
-    Command:
-      scowl
+    Syntax: scowl
 
     Examples: You scowl.
               You scowl at Hailey.
@@ -3475,8 +3395,7 @@ class CmdScowl(Social):
 
 class CmdScratch(Social):
     """
-    Command:
-      scratch
+    Syntax: scratch
 
     Examples: You scratch your head.
               You scratch Hailey.
@@ -3515,8 +3434,7 @@ class CmdScratch(Social):
 
 class CmdScream(Social):
     """
-    Command:
-      scream
+    Syntax: scream
 
     Examples: You scream!
               You scream at Hailey!
@@ -3548,8 +3466,7 @@ class CmdScream(Social):
 
 class CmdShake(Social):
     """
-    Command:
-      shake
+    Syntax: shake
 
     Examples: You shake your head.
               You shake your head at Hailey.
@@ -3581,8 +3498,7 @@ class CmdShake(Social):
 
 class CmdShiver(Social):
     """
-    Command:
-      shiver
+    Syntax: shiver
 
     Examples: You shiver.
 
@@ -3605,8 +3521,7 @@ class CmdShiver(Social):
 
 class CmdShrug(Social):
     """
-    Command:
-      shrug
+    Syntax: shrug
 
     Examples: You shrug.
               You shrug at Hailey.
@@ -3638,8 +3553,7 @@ class CmdShrug(Social):
 
 class CmdShudder(Social):
     """
-    Command:
-      shudder
+    Syntax: shudder
 
     Examples: You shudder.
 
@@ -3662,8 +3576,7 @@ class CmdShudder(Social):
 
 class CmdShuffle(Social):
     """
-    Command:
-      shuffle
+    Syntax: shuffle
 
     Examples: You shuffle about uncomfortably.
 
@@ -3686,8 +3599,7 @@ class CmdShuffle(Social):
 
 class CmdSit(Social):
     """
-    Command:
-      sit
+    Syntax: sit
 
     Examples: You sit.
               You sit on Hailey.
@@ -3719,20 +3631,17 @@ class CmdSit(Social):
 
 class CmdSlap(Social):
     """
-    Command:
-      slap
-      bslap
+    Syntax:  slap
+    Aliases: bslap
 
     Examples: You slap yourself.
               You slap Hailey.
-
               Hailey slaps herself.
               Hailey slaps Saul.
               Hailey slaps you.
 
               You bitchslap yourself.
               You bitchslap Hailey.
-
               Hailey bitchslaps herself.
               Hailey bitchslaps Saul.
               Hailey bitchslaps you.
@@ -3770,8 +3679,7 @@ class CmdSlap(Social):
 
 class CmdSmack(Social):
     """
-    Command:
-      smack
+    Syntax: smack
 
     Examples: You smack yourself.
               You smack Hailey.
@@ -3810,8 +3718,7 @@ class CmdSmack(Social):
 
 class CmdSmile(Social):
     """
-    Command:
-      smile
+    Syntax: smile
 
     Examples: You smile.
               You smile at Hailey.
@@ -3843,8 +3750,7 @@ class CmdSmile(Social):
 
 class CmdSmirk(Social):
     """
-    Command:
-      smirk
+    Syntax: smirk
 
     Examples: You smirk.
               You smirk at Hailey.
@@ -3876,8 +3782,7 @@ class CmdSmirk(Social):
 
 class CmdSmooch(Social):
     """
-    Command:
-      smooch
+    Syntax: smooch
 
     Examples: You smooch Hailey.
 
@@ -3915,8 +3820,7 @@ class CmdSmooch(Social):
 
 class CmdSnap(Social):
     """
-    Command:
-      snap
+    Syntax: snap
 
     Examples: You snap.
               You snap at Hailey.
@@ -3948,8 +3852,7 @@ class CmdSnap(Social):
 
 class CmdSneer(Social):
     """
-    Command:
-      sneer
+    Syntax: sneer
 
     Examples: You sneer.
               You sneer at Hailey.
@@ -3981,8 +3884,7 @@ class CmdSneer(Social):
 
 class CmdSnicker(Social):
     """
-    Command:
-      snicker
+    Syntax: snicker
 
     Examples: You snicker.
               You snicker at Hailey.
@@ -4014,8 +3916,7 @@ class CmdSnicker(Social):
 
 class CmdSniff(Social):
     """
-    Command:
-      sniff
+    Syntax: sniff
 
     Examples: You sniff.
               You sniff Hailey.
@@ -4047,8 +3948,7 @@ class CmdSniff(Social):
 
 class CmdSniffle(Social):
     """
-    Command:
-      sniffle
+    Syntax: sniffle
 
     Examples: You sniffle.
               You sniffle at Hailey.
@@ -4080,8 +3980,7 @@ class CmdSniffle(Social):
 
 class CmdSnore(Social):
     """
-    Command:
-      snore
+    Syntax: snore
 
     Examples: You snore.
               You snore in Hailey's ear.
@@ -4114,8 +4013,7 @@ class CmdSnore(Social):
 
 class CmdSnort(Social):
     """
-    Command:
-      snort
+    Syntax: snort
 
     Examples: You snort.
               You snort at Hailey.
@@ -4147,8 +4045,7 @@ class CmdSnort(Social):
 
 class CmdSnuggle(Social):
     """
-    Command:
-      snuggle
+    Syntax: snuggle
 
     Examples: You snuggle up to Hailey.
 
@@ -4186,8 +4083,7 @@ class CmdSnuggle(Social):
 
 class CmdSob(Social):
     """
-    Command:
-      sob
+    Syntax: sob
 
     Examples: You sob.
               You sob on Hailey's shoulder.
@@ -4219,8 +4115,7 @@ class CmdSob(Social):
 
 class CmdSpank(Social):
     """
-    Command:
-      spank
+    Syntax: spank
 
     Examples: You spank yourself.
               You spank Hailey.
@@ -4255,8 +4150,7 @@ class CmdSpank(Social):
 
 class CmdSpit(Social):
     """
-    Command:
-      spit
+    Syntax: spit
 
     Examples: You spit.
               You spit on Hailey.
@@ -4288,8 +4182,7 @@ class CmdSpit(Social):
 
 class CmdSqueeze(Social):
     """
-    Command:
-      squeeze
+    Syntax: squeeze
 
     Examples: You squeeze yourself.
               You squeeze Hailey.
@@ -4336,8 +4229,7 @@ class CmdSqueeze(Social):
 
 class CmdStagger(Social):
     """
-    Command:
-      stagger
+    Syntax: stagger
 
     Examples: You stagger.
               You stagger around Hailey.
@@ -4369,8 +4261,7 @@ class CmdStagger(Social):
 
 class CmdStamp(Social):
     """
-    Command:
-      stamp
+    Syntax: stamp
 
     Examples: You stamp your foot.
               You stamp your foot at Hailey.
@@ -4402,8 +4293,7 @@ class CmdStamp(Social):
 
 class CmdStand(Social):
     """
-    Command:
-      stand
+    Syntax: stand
 
     Examples: You stand.
               You stand near Hailey.
@@ -4435,8 +4325,7 @@ class CmdStand(Social):
 
 class CmdStare(Social):
     """
-    Command:
-      stare
+    Syntax: stare
 
     Examples: You stare.
               You stare at Hailey.
@@ -4475,8 +4364,7 @@ class CmdStare(Social):
 
 class CmdStifle(Social):
     """
-    Command:
-      stifle
+    Syntax: stifle
 
     Examples: You stifle a giggle.
 
@@ -4499,8 +4387,7 @@ class CmdStifle(Social):
 
 class CmdStroke(Social):
     """
-    Command:
-      stroke
+    Syntax: stroke
 
     Examples: You stroke yourself.
               You stroke Hailey.
@@ -4539,8 +4426,7 @@ class CmdStroke(Social):
 
 class CmdStomp(Social):
     """
-    Command:
-      stomp
+    Syntax: stomp
 
     Examples: You stomp around angrily!
               You stomp on Hailey!
@@ -4579,8 +4465,7 @@ class CmdStomp(Social):
 
 class CmdStretch(Social):
     """
-    Command:
-      stretch
+    Syntax: stretch
 
     Examples: You stretch out languidly.
               
@@ -4607,8 +4492,7 @@ class CmdStretch(Social):
 
 class CmdStrut(Social):
     """
-    Command:
-      strut
+    Syntax: strut
 
     Examples: You strut your stuff.
               
@@ -4635,8 +4519,7 @@ class CmdStrut(Social):
 
 class CmdStumble(Social):
     """
-    Command:
-      stumble
+    Syntax: stumble
 
     Examples: You stumble.
               You stumble around Hailey.
@@ -4669,8 +4552,7 @@ class CmdStumble(Social):
 class CmdSulk(Social):
     #Written by Myrh.
     """
-    Command:
-      sulk
+    Syntax: sulk
 
     Examples: You sulk petulantly.
               You sulk near Hailey petulantly.
@@ -4707,8 +4589,7 @@ class CmdSulk(Social):
 
 class CmdTackle(Social):
     """
-    Command:
-      tackle
+    Syntax: tackle
 
     Examples: You tackle Hailey.
 
@@ -4742,8 +4623,7 @@ class CmdTackle(Social):
 
 class CmdTap(Social):
     """
-    Command:
-      tap
+    Syntax: tap
 
     Examples: You tap your foot impatiently.
               You tap Hailey.
@@ -4785,8 +4665,7 @@ class CmdTap(Social):
 
 class CmdTease(Social):
     """
-    Command:
-      tease
+    Syntax: tease
 
     Examples: You tease yourself.
               You tease Hailey.
@@ -4825,8 +4704,7 @@ class CmdTease(Social):
 
 class CmdThank(Social):
     """
-    Command:
-      thank
+    Syntax: thank
 
     Examples: You thank everyone.
               You thank Hailey.
@@ -4865,8 +4743,7 @@ class CmdThank(Social):
 
 class CmdThink(Social):
     """
-    Command:
-      think
+    Syntax: think
 
     Examples: You think.
               You think about Hailey.
@@ -4902,8 +4779,7 @@ class CmdThink(Social):
 
 class CmdTickle(Social):
     """
-    Command:
-      tickle
+    Syntax: tickle
 
     Examples: You tickle yourself.
               You tickle Hailey.
@@ -4946,8 +4822,7 @@ class CmdTickle(Social):
 
 class CmdTongue(Social):
     """
-    Command:
-      tongue
+    Syntax: tongue
 
     Examples: You stick your tongue out.
               You stick your tongue out at Hailey.
@@ -4979,8 +4854,7 @@ class CmdTongue(Social):
 
 class CmdTremble(Social):
     """
-    Command:
-      tremble
+    Syntax: tremble
 
     Examples: You tremble.
 
@@ -5004,8 +4878,7 @@ class CmdTremble(Social):
 
 class CmdTsk(Social):
     """
-    Command:
-      tsk
+    Syntax: tsk
 
     Examples: You tsk.
               You tsk at Hailey.
@@ -5041,8 +4914,7 @@ class CmdTsk(Social):
 
 class CmdTwiddle(Social):
     """
-    Command:
-      twiddle
+    Syntax: twiddle
 
     Examples: You twiddle your thumbs.
 
@@ -5065,8 +4937,7 @@ class CmdTwiddle(Social):
 
 class CmdTwirl(Social):
     """
-    Command:
-      twirl
+    Syntax: twirl
 
     Examples: You twirl around.
               You twirl Hailey around.
@@ -5103,8 +4974,7 @@ class CmdTwirl(Social):
 
 class CmdTwitch(Social):
     """
-    Command:
-      twitch
+    Syntax: twitch
 
     Examples: You twitch.
               You twitch at Hailey.
@@ -5136,8 +5006,7 @@ class CmdTwitch(Social):
 
 class CmdWait(Social):
     """
-    Command:
-      wait
+    Syntax: wait
 
     Examples: You wait.
               You wait for Hailey.
@@ -5169,8 +5038,7 @@ class CmdWait(Social):
 
 class CmdWaltz(Social):
     """
-    Command:
-      waltz
+    Syntax: waltz
 
     Examples: You waltz.
               You waltz with Hailey.
@@ -5202,8 +5070,7 @@ class CmdWaltz(Social):
 
 class CmdWave(Social):
     """
-    Command:
-      wave
+    Syntax: wave
 
     Examples: You wave.
               You wave at Hailey.
@@ -5235,8 +5102,7 @@ class CmdWave(Social):
 
 class CmdWhimper(Social):
     """
-    Command:
-      whimper
+    Syntax: whimper
 
     Examples: You whimper.
               You whimper at Hailey.
@@ -5268,8 +5134,7 @@ class CmdWhimper(Social):
 
 class CmdWiggle(Social):
     """
-    Command:
-      wiggle
+    Syntax: wiggle
 
     Examples: You wiggle your butt.
               You wiggle your butt at Hailey.
@@ -5301,8 +5166,7 @@ class CmdWiggle(Social):
 
 class CmdWince(Social):
     """
-    Command:
-      wince
+    Syntax: wince
 
     Examples: You wince.
               You wince at Hailey.
@@ -5334,8 +5198,7 @@ class CmdWince(Social):
 
 class CmdWipe(Social):
     """
-    Command:
-      wipe
+    Syntax: wipe
 
     Examples: You wipe your hands off.
               You wipe your hands off on Hailey.
@@ -5378,8 +5241,7 @@ class CmdWipe(Social):
 
 class CmdWonder(Social):
     """
-    Command:
-      wonder
+    Syntax: wonder
 
     Examples: You wonder.
               You wonder about Hailey.
@@ -5411,8 +5273,7 @@ class CmdWonder(Social):
 
 class CmdWorship(Social):
     """
-    Command:
-      worship
+    Syntax: worship
 
     Examples: You worship.
               You worship Hailey.
@@ -5444,8 +5305,7 @@ class CmdWorship(Social):
 
 class CmdWow(Social):
     """
-    Command:
-      wow
+    Syntax: wow
 
     Examples: You wow at it all.
               You wow at Hailey.
@@ -5483,8 +5343,7 @@ class CmdWow(Social):
 
 class CmdYawn(Social):
     """
-    Command:
-      yawn
+    Syntax: yawn
 
     Examples: You yawn.
               You yawn at Hailey.
