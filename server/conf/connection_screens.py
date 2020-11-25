@@ -24,9 +24,7 @@ from django.conf import settings
 from evennia import utils
 
 CONNECTION_SCREEN = """
-|b===================================================================|n
-
-                            |C Alysium
+                            |w Alysium
 
 |c    .                  |W.-.    |c.      |C*     |w_   |c.
            |C*          |w/   \\              _/ \\       |C*    |c.
@@ -43,8 +41,4 @@ CONNECTION_SCREEN = """
  If you have an existing account, connect to it by typing:
       |wconnect <username> <password>|n
  If you need to create an account, type (without the <>'s):
-      |wcreate <username> <password>|n
-
-|b===================================================================|n\n> """.format(
-    settings.SERVERNAME, utils.get_evennia_version("short")
-)
+      |wcreate <username> <password>|n\n"""

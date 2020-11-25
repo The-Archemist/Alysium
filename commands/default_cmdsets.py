@@ -15,7 +15,7 @@ own cmdsets by inheriting from them or directly from `evennia.CmdSet`.
 """
 
 from evennia import default_cmds
-from commands import account, admin, character, social
+from commands import account, admin, character, social, unconnected
 
 
 class AccountCmdSet(default_cmds.AccountCmdSet):
@@ -72,10 +72,11 @@ class UnloggedinCmdSet(default_cmds.UnloggedinCmdSet):
         """
         Populates the cmdset
         """
-        super().at_cmdset_creation()
+        #super().at_cmdset_creation()
         #
         # any commands you add below will overload the default ones.
         #
+        self.add(unconnected.UnconnectedCmdSet())
 
 
 class SessionCmdSet(default_cmds.SessionCmdSet):
