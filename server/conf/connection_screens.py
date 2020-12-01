@@ -19,7 +19,6 @@ are defined in evennia.default_cmds.UnloggedinCmdSet. The parsing and display
 of the screen is done by the unlogged-in "look" command.
 
 """
-
 from django.conf import settings
 from evennia import utils
 
@@ -37,8 +36,4 @@ CONNECTION_SCREEN = """
 |Y  /  `-.__ ^   / .-'.--'    . /    `--./ .-'  `-.  `-. `.  -  `.
 |Y /        `.  / /      `-.   /  .-'   / .   .'   \\    \\  \\  .-  \\
 |n
-
- If you have an existing account, connect to it by typing:
-      |wconnect <username> <password>|n
- If you need to create an account, type (without the <>'s):
-      |wcreate <username> <password>|n\n"""
+"""
