@@ -33,6 +33,10 @@ class Character(DefaultCharacter):
     at_post_puppet - Echoes "AccountName has entered the game" to the room.
 
     """
+    def at_object_creation(self):
+        self.db.sex = None
+
+        pass
 
     def at_post_unpuppet(self, account, session=None, **kwargs):
         """

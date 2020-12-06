@@ -1,4 +1,5 @@
 from evennia import CmdSet
+from evennia.commands.default.building import CmdExamine
 from commands.command import Command
 
 class AdminCmdSet(CmdSet):
@@ -12,6 +13,7 @@ class AdminCmdSet(CmdSet):
         "Populates the cmdset"
 
         # Account-specific commands
+        self.add(CmdExamine())
         self.add(CmdHome())
         self.add(CmdQuell())
 

@@ -2,7 +2,7 @@ import re
 import textwrap
 from django.conf import settings
 from evennia.utils.ansi import strip_ansi
-from evennia.utils.utils import to_str
+from evennia.utils.utils import to_str, wrap
 
 def grammarize(text, ending='.'):
     text = text.strip()
@@ -14,21 +14,96 @@ def grammarize(text, ending='.'):
         
     return text
 
+def wrap(text, text_width=None, screen_width=None, pre_text="", indent=0, align="l"):
+    
+    # Format Text
+    text_width = text_width if text_width else settings.CLIENT_DEFAULT_WIDTH
+    screen_width = screen_width if screen_width else settings.CLIENT_DEFAULT_WIDTH
+
+    if screen_width is not None:
+        text_lines = re.split(r"\n|\|/", text)
+        final_text = pre_text
+        first_line = True
+        for x in text_lines:
+            word_list = re.findall(r"((?:\S+\s*)|(?:^\s+))", x)
+            line_list = []
+            line_len = len(x) - len(strip_ansi(x))
+            line_available_char = text_width - len(strip_ansi(pre_text))# + line_len
+            line = ""
+            for y in word_list:
+                line_available_char = line_available_char + (len(y)-len(strip_ansi(y)))
+                if (len(y) <= line_available_char):
+                    line += y
+                    line_available_char = line_available_char - len(y)
+                else:
+                    if (len(y) > text_width - len(strip_ansi(pre_text))):
+                        line = ""
+                        line_available_char = text_width - len(strip_ansi(pre_text))
+                        character_list = re.findall(r"((?:\|[bBcCgGmMrRwWxXyY])|\|\d{3}|(?:.))", y)
+                        for character in character_list:
+                            if (len(character) <= line_available_char):
+                                line += character
+                                if not character in character_list:
+                                    line_available_char = line_available_char - len(character)
+                                    
+                            else:
+                                line_list.append(line)
+                                line = character
+                                if character in character_list:
+                                    line_available_char = text_width - len(strip_ansi(pre_text))
+                                else:
+                                    line_available_char = text_width - len(strip_ansi(pre_text)) - len(character)
+                    else:
+                        line_list.append(line)
+                        line = y
+                        line_available_char = text_width - len(strip_ansi(pre_text)) - len(y) + (len(y)-len(strip_ansi(y)))
+            line_list.append(line)
+            for y in line_list:
+                if ((len(y) - len(strip_ansi(y))) > 0):
+                    spaces = len(y) - len(strip_ansi(y))
+                else:
+                    spaces = 0
+                        
+                line_text = ""
+        
+                if first_line:
+                    final_text = justify(final_text, width=screen_width+spaces, align=align, indent=indent)
+                    line_text = justify(y, width=screen_width+spaces, align=align)
+                else:
+                    line_text = justify(y, width=screen_width+spaces, align=align, indent=len(strip_ansi(pre_text))+indent)
+
+                final_text += line_text+"|/"
+                first_line = False
+    final_text = final_text[:-2]
+    return final_text + "|n"
+
+
+def justify(text, width=settings.CLIENT_DEFAULT_WIDTH, align="l", indent=0):
+    
+    if align == "l":
+        return "|n" + " "*indent + text
+    elif align == "c":
+        return " "*((width/2)-(len(text)/2)) + text
+
+    return text
+
+
+"""
 def wrap(text, width = None, pre_text = "", indent = 0):
-    """
-    Safely wrap text to a certain number of characters.
+    
+    #Safely wrap text to a certain number of characters.
 
-    Args:
-        text (str): The text to wrap.
-        width (int, optional): The number of characters to wrap to.
-        indent (int): How much to indent each line (with whitespace).
+    #Args:
+    #    text (str): The text to wrap.
+    #    width (int, optional): The number of characters to wrap to.
+    #    indent (int): How much to indent each line (with whitespace).
 
-    Returns:
-        text (str): Properly wrapped text.
+    #Returns:
+    #    text (str): Properly wrapped text.
 
-    Note: Could probably be optimized with a while loop.
+    #Note: Could probably be optimized with a while loop.
 
-    """
+    
     width = width if width else settings.CLIENT_DEFAULT_WIDTH
 
     if not text:
@@ -115,3 +190,4 @@ def justify(text, width, indent): #align,):
 #        return " "*((width/2)-(len(text)/2)) + text
 
 #    return text
+"""

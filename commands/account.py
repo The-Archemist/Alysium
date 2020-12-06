@@ -5,7 +5,6 @@ from django.conf import settings
 from evennia import CmdSet
 from evennia.server.sessionhandler import SESSIONS
 from evennia.utils.utils import dedent, fill
-from server.utils.utils import wrap
 
 class AccountCmdSet(CmdSet):
     """
