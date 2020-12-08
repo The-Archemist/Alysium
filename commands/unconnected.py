@@ -8,9 +8,8 @@ from evennia.commands.cmdhandler import CMD_LOGINSTART
 from evennia.utils.evmenu import EvMenu
 from evennia.utils.utils import callables_from_module, random_string_from_module
 
-
 _CONNECTION_SCREEN_MODULE = settings.CONNECTION_SCREEN_MODULE
-_LOGIN_DIALOGUE = "world.dialogue.unconnected.login"
+_LOGIN_DIALOGUE = "world.interactions.unconnected.login"
 
 class UnconnectedCmdSet(CmdSet):
     """
